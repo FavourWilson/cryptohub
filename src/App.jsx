@@ -1,7 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { checkAuth } from "./features/users";
+
 import LandingPageLayout from "./components/layouts/LandingPageLayout";
 import AccountPageLayout from "./components/layouts/AccountPageLayout";
+import DashboardLayout from "./components/layouts/DashboardLayout";
+
 import Home from "./pages/landing/Home";
 import Plans from "./pages/landing/Plans";
 import FAQs from "./pages/landing/FAQs";
@@ -11,10 +16,10 @@ import PnP from "./pages/landing/PnP";
 import TnC from "./pages/landing/TnC";
 import Career from "./pages/landing/Career";
 import ContactUs from "./pages/landing/ContactUs";
+
 import Login from "./pages/account/Login";
 import Register from "./pages/account/Register";
-import "./App.css";
-import DashboardLayout from "./components/layouts/DashboardLayout";
+
 import Dashboard from "./pages/dashboard/Dashboard";
 import Deposit from "./pages/dashboard/Deposit";
 import Withdraw from "./pages/dashboard/Withdraw";
@@ -29,8 +34,6 @@ import AllFaqs from "./pages/admin/AllFaqs";
 import Testimonials from "./pages/admin/Testimonials";
 import Feedback from "./pages/admin/Feedback";
 import AllBlog from "./pages/admin/AllBlog";
-import { checkAuth } from "./features/users";
-import { useDispatch } from "react-redux";
 import ViewUser from "./pages/admin/ViewUser";
 import Address from "./pages/admin/Address";
 
@@ -41,27 +44,17 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const init = async () => {
-    const res = await dispatch(checkAuth());
-    if (res.meta.requestStatus.toLowerCase() === "rejected") {
-      localStorage.removeItem("cfb90493-c364-4ade-820d-b6848bc65f44");
-      location.reload;
-    }
-  };
-
-  const AddScript = (x, y) => {
-    if (!document.querySelector(`[src="/assets/${x}/${y}"]`)) {
-      const script = document.createElement("script");
-      script.src = `/assets/${x}/${y}`;
-      script.async = !1;
-      // document.body.appendChild(script);
-      document.getElementById("scripts").appendChild(script);
-    }
-  };
-
   useEffect(() => {
+    const init = async () => {
+      const res = await dispatch(checkAuth());
+      if (res.meta.requestStatus.toLowerCase() === "rejected") {
+        localStorage.removeItem("cfb90493-c364-4ade-820d-b6848bc65f44");
+        location.reload();
+      }
+    };
+
     init();
-  
+
     if (
       location.pathname.includes("-trading") ||
       location.pathname.includes("/faq") ||
@@ -74,12 +67,15 @@ function App() {
       location.pathname.includes("/privacy")
     ) {
       for (let i = 0; i < js.length; i++) {
-        AddScript(js[i].path, js[i].file);
+        const { path, file } = js[i];
+        if (!document.querySelector(`[src="/assets/${path}/${file}"]`)) {
+          const script = document.createElement("script");
+          script.src = `/assets/${path}/${file}`;
+          script.async = false;
+        }
       }
-    }  
-    
-
-  }, [location.pathname]);
+    }
+  }, [dispatch, location]);
 
   return (
     <>
