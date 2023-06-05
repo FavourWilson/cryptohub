@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700;800&display=swap');
+
+.Transform {
+    @apply transition-colors duration-300 transform
+}
+
+.background {
+    /* background: rgb(126, 140, 211/0.8); */
+    /* backdrop-filter: blur(4px); */
+    /* -webkit-backdrop-filter: blur(4px); */
+    background: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.font-heading{
+    font-family: "Futura";
+}
+
+.EBfont {
+    font-family: "EB Garamond", serif;
+}

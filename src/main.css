@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Futura";
+    src:local("Futura"), url("./fonts/Futura\ Bold\ font.ttf");
+    font-weight: bold;
+}
