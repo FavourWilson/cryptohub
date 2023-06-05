@@ -61,7 +61,7 @@ function App() {
 
   useEffect(() => {
     init();
-    document.getElementById("scripts").innerHTML = "";
+  
     if (
       location.pathname.includes("-trading") ||
       location.pathname.includes("/faq") ||
@@ -76,7 +76,9 @@ function App() {
       for (let i = 0; i < js.length; i++) {
         AddScript(js[i].path, js[i].file);
       }
-    }
+    }  
+    
+
   }, [location.pathname]);
 
   return (
