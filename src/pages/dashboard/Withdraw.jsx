@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { getTransactions, resetTransaction,sendToBal } from "../../features/users";
 import { toast, Toaster } from "react-hot-toast";
 import nodemailer from 'nodemailer'
-import { withdraw } from "../../features/users";
 
 const init = {
   amount: "",
