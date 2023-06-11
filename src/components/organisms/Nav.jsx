@@ -13,7 +13,7 @@ const Nav = () => {
 
   return (
     <>
-      <header className="w-full fixed top-0 z-30 background bg-blue-20x0">
+      <header className="w-full fixed top-0 z-30 background bg-white">
         <div className="px-4 mx-auto sm:px-6 pt-3 lg:pt-0 lg:px-8 lg:flex lg:items-center lg:justify-between">
           <div className="flex items-center justify-between h-16 lg:h-18">
             <div className="flex-shrink-0">
