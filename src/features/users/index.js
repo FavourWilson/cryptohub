@@ -815,14 +815,13 @@ const userSlice = createSlice({
     resetTransaction: (state) => {
       state.transaction = {};
     },
-<<<<<<< HEAD
+
     withdraw: (state, action) => {
       const amount = action.payload;
       const newAmount = parseInt(amount)
       state.balance -= newAmount;
     },
-=======
->>>>>>> master
+
   },
   extraReducers: (builder) => {
     builder
