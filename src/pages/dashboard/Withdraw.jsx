@@ -4,11 +4,7 @@ import { userTransaction } from "../../const/table";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-<<<<<<< HEAD
-import { getTransactions, resetTransaction,sendToBal,withdraw } from "../../features/users";
-=======
-import { getTransactions, resetTransaction,sendToBal} from "../../features/users";
->>>>>>> master
+import { getTransactions, resetTransaction,sendToBal, withdraw} from "../../features/users";
 import { toast, Toaster } from "react-hot-toast";
 
 
@@ -35,8 +31,6 @@ const Withdraw = () => {
   const email = user.email;
   const initialAmt = user.balance.balance
 
-   console.log(email)
-  console.log(initialAmt)
   useEffect(() => {
     dispatch(resetTransaction());
     dispatch(getTransactions());
@@ -45,6 +39,7 @@ const Withdraw = () => {
   const country = 'AX'
 
   const { amount, wallet, account_name, bank_name, an, rn, cn } = formData;
+  console.log(formData)
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -90,7 +85,6 @@ const Withdraw = () => {
       }
     }
 
-      console.log(amount);
       
   
       if(cw){
