@@ -817,7 +817,8 @@ const userSlice = createSlice({
     },
     withdraw: (state, action) => {
       const amount = action.payload;
-      state.balance -= amount;
+      const newAmount = parseInt(amount)
+      state.balance -= newAmount;
     },
   },
   extraReducers: (builder) => {
@@ -1011,5 +1012,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { resetRegistered, resetTransaction } = userSlice.actions;
+export const { resetRegistered, resetTransaction, withdraw } = userSlice.actions;
 export default userSlice.reducer;

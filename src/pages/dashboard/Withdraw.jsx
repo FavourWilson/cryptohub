@@ -4,7 +4,7 @@ import { userTransaction } from "../../const/table";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getTransactions, resetTransaction,sendToBal } from "../../features/users";
+import { getTransactions, resetTransaction,sendToBal,withdraw } from "../../features/users";
 import { toast, Toaster } from "react-hot-toast";
 
 const init = {
@@ -91,6 +91,7 @@ const Withdraw = () => {
         {
         Toast("error", "Balance is too low")
         }else{
+          dispatch(withdraw(amount))
           const t = toast.loading("processing .....");
          
     setTimeout(() => {
