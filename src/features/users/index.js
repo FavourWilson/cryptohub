@@ -817,12 +817,14 @@ const userSlice = createSlice({
     },
 
     withdraw: (state, action) => {
-      const amount = action.payload;
+      const amount = action.payload
       const newAmount = parseInt(amount)
-      state.balance -= newAmount;
+      state.user.balance =- newAmount
+    }
+  
     },
 
-  },
+  
   extraReducers: (builder) => {
     builder
       .addCase(GetWallet.pending, (state) => {
