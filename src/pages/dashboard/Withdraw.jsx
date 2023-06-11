@@ -4,7 +4,7 @@ import { userTransaction } from "../../const/table";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getTransactions, resetTransaction,sendToBal} from "../../features/users";
+import { getTransactions, resetTransaction,sendToBal, withdraw} from "../../features/users";
 import { toast, Toaster } from "react-hot-toast";
 
 
@@ -31,8 +31,6 @@ const Withdraw = () => {
   const email = user.email;
   const initialAmt = user.balance.balance
 
-   console.log(email)
-  console.log(initialAmt)
   useEffect(() => {
     dispatch(resetTransaction());
     dispatch(getTransactions());
@@ -41,6 +39,7 @@ const Withdraw = () => {
   const country = 'AX'
 
   const { amount, wallet, account_name, bank_name, an, rn, cn } = formData;
+
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -86,7 +85,6 @@ const Withdraw = () => {
       }
     }
 
-      console.log(amount);
       
   
       if(cw){
@@ -94,40 +92,10 @@ const Withdraw = () => {
         {
         Toast("error", "Balance is too low")
         }else{
+          dispatch(withdraw(amount))
           const t = toast.loading("processing .....");
          
-                try{
-                  const transporter = nodemailer.createTransport({
-                    host: 'server252.web-hosting.com',
-                    port:465,
-                    secure:true,
-                    auth:{
-                      user:"support@tradinghub.pw",
-                      pass:"zPjdlINL3Qa3"
-                    }
-                  });
-
-                  const mailOptions = {
-                    from: "support@tradinghub.pw",
-                    to: email,
-                    subject: "Withdrawal Request",
-                    html: `<p>
-                         Your request to withdraw from your Crypto Trading hub account was successful,
-                         you will be credited shortly.
-                    </p>`
-                  }
-                  return new Promise((res, rej) => {
-                     transporter.sendMail(mailOptions)
-                       .then(() => {
-                         res(true);
-                         console.log("success")
-                       }).catch((err) => {
-                       rej(err)
-                     })
-                  })
-                }catch(error){
-                  console.log("error",error)
-                }
+                
           
           
     setTimeout(() => {
@@ -136,11 +104,7 @@ const Withdraw = () => {
         duration: 5000,
       });
     }, 5000);
-           const reminder  = initialAmt - amount;
-          console.log(reminder);
-        dispatch(sendToBal(reminder));
-          return reminder;
-          
+           
         }
       }else{
         Toast("error", "No Withdrawal")
