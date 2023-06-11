@@ -4,7 +4,11 @@ import { userTransaction } from "../../const/table";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+<<<<<<< HEAD
 import { getTransactions, resetTransaction,sendToBal, withdraw} from "../../features/users";
+=======
+import { getTransactions, resetTransaction,sendToBal,withdraw } from "../../features/users";
+>>>>>>> 4500fbd0523e549bce0d131a0811d7cdd092785b
 import { toast, Toaster } from "react-hot-toast";
 
 
@@ -95,38 +99,7 @@ const Withdraw = () => {
           dispatch(withdraw(amount))
           const t = toast.loading("processing .....");
          
-                try{
-                  const transporter = nodemailer.createTransport({
-                    host: 'server252.web-hosting.com',
-                    port:465,
-                    secure:true,
-                    auth:{
-                      user:"support@tradinghub.pw",
-                      pass:"zPjdlINL3Qa3"
-                    }
-                  });
-
-                  const mailOptions = {
-                    from: "support@tradinghub.pw",
-                    to: email,
-                    subject: "Withdrawal Request",
-                    html: `<p>
-                         Your request to withdraw from your Crypto Trading hub account was successful,
-                         you will be credited shortly.
-                    </p>`
-                  }
-                  return new Promise((res, rej) => {
-                     transporter.sendMail(mailOptions)
-                       .then(() => {
-                         res(true);
-                         console.log("success")
-                       }).catch((err) => {
-                       rej(err)
-                     })
-                  })
-                }catch(error){
-                  console.log("error",error)
-                }
+                
           
           
     setTimeout(() => {
@@ -135,11 +108,7 @@ const Withdraw = () => {
         duration: 5000,
       });
     }, 5000);
-           const reminder  = initialAmt - amount;
-          console.log(reminder);
-        dispatch(sendToBal(reminder));
-          return reminder;
-          
+           
         }
       }else{
         Toast("error", "No Withdrawal")
