@@ -4,11 +4,7 @@ import { userTransaction } from "../../const/table";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-<<<<<<< HEAD
 import { getTransactions, resetTransaction,sendToBal, withdraw} from "../../features/users";
-=======
-import { getTransactions, resetTransaction,sendToBal,withdraw } from "../../features/users";
->>>>>>> 4500fbd0523e549bce0d131a0811d7cdd092785b
 import { toast, Toaster } from "react-hot-toast";
 
 

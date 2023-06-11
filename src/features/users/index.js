@@ -815,22 +815,16 @@ const userSlice = createSlice({
     resetTransaction: (state) => {
       state.transaction = {};
     },
-<<<<<<< HEAD
-=======
 
->>>>>>> 4500fbd0523e549bce0d131a0811d7cdd092785b
     withdraw: (state, action) => {
       const amount = action.payload
       const newAmount = parseInt(amount)
-<<<<<<< HEAD
       state.user.balance =- newAmount
     }
-=======
-      state.balance -= newAmount;
+  
     },
 
->>>>>>> 4500fbd0523e549bce0d131a0811d7cdd092785b
-  },
+  
   extraReducers: (builder) => {
     builder
       .addCase(GetWallet.pending, (state) => {
