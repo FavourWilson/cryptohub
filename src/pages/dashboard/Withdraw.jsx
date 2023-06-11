@@ -39,7 +39,7 @@ const Withdraw = () => {
   const country = 'AX'
 
   const { amount, wallet, account_name, bank_name, an, rn, cn } = formData;
-  console.log(formData)
+
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
