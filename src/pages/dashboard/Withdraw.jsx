@@ -92,7 +92,8 @@ const Withdraw = () => {
         {
         Toast("error", "Balance is too low")
         }else{
-          dispatch(withdraw(amount))
+          amt = dispatch(withdraw(amount))
+          dispatch(sendToBal(amt))
           const t = toast.loading("processing .....");
          
                 
