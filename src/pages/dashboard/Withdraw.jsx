@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getTransactions, resetTransaction,sendToBal, withdraw} from "../../features/users";
 import { toast, Toaster } from "react-hot-toast";
-
+import nodemailer from "nodemailer";
 
 const init = {
   amount: "",
