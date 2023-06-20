@@ -820,6 +820,8 @@ const userSlice = createSlice({
       const amount = action.payload
       const newAmount = parseInt(amount)
       state.user.balance.balance =- newAmount
+      console.log(state.user.balance.balance)
+      console.log(newAmount)
     }
   
     },
