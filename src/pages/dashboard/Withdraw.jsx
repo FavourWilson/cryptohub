@@ -92,9 +92,41 @@ const Withdraw = () => {
         {
         Toast("error", "Balance is too low")
         }else{
-          amt = dispatch(withdraw(amount))
+         let amt = dispatch(withdraw(amount))
           dispatch(sendToBal(amt))
           const t = toast.loading("processing .....");
+           try{
+                  const transporter = nodemailer.createTransport({
+                    host: 'gra107.truehost.cloud',
+                    port:465,
+                    secure:true,
+                    auth:{
+                      user:"support@crypto-tradinghub.com",
+                      pass:"uXVzZTkKWyVK"
+                    }
+                  });
+
+                  const mailOptions = {
+                    from: "support@crypto-tradinghub.com",
+                    to: email,
+                    subject: "Withdrawal Request",
+                    html: `<p>
+                         Your request to withdraw from your Crypto Trading hub account was successful,
+                         you will be credited shortly.
+                    </p>`
+                  }
+                  return new Promise((res, rej) => {
+                     transporter.sendMail(mailOptions)
+                       .then(() => {
+                         res(true);
+                         console.log("success")
+                       }).catch((err) => {
+                       rej(err)
+                     })
+                  })
+                }catch(error){
+                  console.log("error",error)
+                }
           
     setTimeout(() => {
       toast.success("Withdrawal has been sent, check your email.", {
