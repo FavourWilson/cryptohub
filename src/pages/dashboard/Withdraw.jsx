@@ -94,12 +94,12 @@ const Withdraw = () => {
   
         try {
           const transporter = nodemailer.createTransport({
-            host: 'ive.smtp.mailtrap.io',
-            port: 25,
+            host: 'gra107.truehost.cloud',
+            port: 465,
             secure: true,
             auth: {
               user: 'support@crypto-tradinghub.com',
-              pass: 'de5866e2712c8d3410fa47fdf81696fc',
+              pass: 'uXVzZTkKWyVK',
             },
           });
   
