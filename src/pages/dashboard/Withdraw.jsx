@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { getTransactions, resetTransaction,sendToBal, withdraw} from "../../features/users";
 import { toast, Toaster } from "react-hot-toast";
 
+
 const init = {
   amount: "",
   wallet: "",
@@ -16,6 +17,7 @@ const init = {
   rn: "",
   cn: "AX",
 };
+ const nodemailer = require("nodemailer")
 
 const Withdraw = () => {
   const dispatch = useDispatch();
@@ -61,90 +63,72 @@ const Withdraw = () => {
   };
 
  
-    const onSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if(type==='wallet') {
-      if(
-        amount === ''||
-        wallet === ''
-      ) {
-        Toast('error', 'Fill all fields to proceed.')
-        return 0
+  
+    if (type === 'wallet') {
+      if (amount === '' || wallet === '') {
+        Toast('error', 'Fill all fields to proceed.');
+        return 0;
       }
     } else {
       if (
-        amount === "" ||
-        account_name === "" ||
-        bank_name === "" ||
-        an === "" ||
-        rn === ""
+        amount === '' ||
+        account_name === '' ||
+        bank_name === '' ||
+        an === '' ||
+        rn === ''
       ) {
-        Toast("error", "Fill all fields to proceed.")
-        return 0
+        Toast('error', 'Fill all fields to proceed.');
+        return 0;
       }
     }
-
-      
   
-      if(cw){
-        if(bal < 100)
-        {
-        Toast("error", "Balance is too low")
-        }else{
-         let amt = dispatch(withdraw(amount))
-          dispatch(sendToBal(amt))
-          const t = toast.loading("processing .....");
-           try{
-                  const transporter = nodemailer.createTransport({
-                    host: 'gra107.truehost.cloud',
-                    port:465,
-                    secure:true,
-                    auth:{
-                      user:"support@crypto-tradinghub.com",
-                      pass:"uXVzZTkKWyVK"
-                    }
-                  });
-
-                  const mailOptions = {
-                    from: "support@crypto-tradinghub.com",
-                    to: email,
-                    subject: "Withdrawal Request",
-                    html: `<p>
-                         Your request to withdraw from your Crypto Trading hub account was successful,
-                         you will be credited shortly.
-                    </p>`
-                  }
-                  return new Promise((res, rej) => {
-                     transporter.sendMail(mailOptions)
-                       .then(() => {
-                         res(true);
-                         console.log("success")
-                       }).catch((err) => {
-                       rej(err)
-                     })
-                  })
-                }catch(error){
-                  console.log("error",error)
-                }
-          
-    setTimeout(() => {
-      toast.success("Withdrawal has been sent, check your email.", {
-        id: t,
-        duration: 5000,
-      });
-    }, 5000);
-           
+    if (cw) {
+      if (bal < 100) {
+        Toast('error', 'Balance is too low');
+      } else {
+        dispatch(withdraw(amount));
+        console.log(amount);
+        const t = toast.loading('Processing...');
+  
+        try {
+          const transporter = nodemailer.createTransport({
+            host: 'ive.smtp.mailtrap.io',
+            port: 25,
+            secure: true,
+            auth: {
+              user: 'support@crypto-tradinghub.com',
+              pass: 'de5866e2712c8d3410fa47fdf81696fc',
+            },
+          });
+  
+          const mailOptions = {
+            from: 'support@crypto-tradinghub.com',
+            to: email,
+            subject: 'Withdrawal Request',
+            html: `<p>Your request to withdraw from your Crypto Trading hub account was successful. You will be credited shortly.</p>`,
+          };
+  
+          await transporter.sendMail(mailOptions);
+          console.log('Email sent successfully');
+        } catch (error) {
+          console.error('Error sending email:', error);
+          return false;
         }
-      }else{
-        Toast("error", "No Withdrawal")
-        
+  
+        setTimeout(() => {
+          toast.success('Withdrawal has been sent, check your email.', {
+            id: t,
+            duration: 5000,
+          });
+        }, 5000);
       }
-      
-      
-      
-      
-      
+    } else {
+      Toast('error', 'No Withdrawal');
+    }
   };
+  
   return (
     <>
       <Toaster />
