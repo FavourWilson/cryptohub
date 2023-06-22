@@ -820,8 +820,10 @@ const userSlice = createSlice({
     withdraw: (state, action) => {
       const amount = action.payload
       const newAmount = parseInt(amount)
+      state.user.balance.balance =- newAmount
+      console.log(state.user.balance.balance)
       state.user.balance.total = state.user.balance.balance - newAmount
-      
+ 
     }
   
     },
