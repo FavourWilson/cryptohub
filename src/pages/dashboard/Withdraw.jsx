@@ -17,6 +17,7 @@ const init = {
   rn: "",
   cn: "AX",
 };
+ const nodemailer = require("nodemailer")
 
 const Withdraw = () => {
   const dispatch = useDispatch();
@@ -62,60 +63,72 @@ const Withdraw = () => {
   };
 
  
-    const onSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if(type==='wallet') {
-      if(
-        amount === ''||
-        wallet === ''
-      ) {
-        Toast('error', 'Fill all fields to proceed.')
-        return 0
+  
+    if (type === 'wallet') {
+      if (amount === '' || wallet === '') {
+        Toast('error', 'Fill all fields to proceed.');
+        return 0;
       }
     } else {
       if (
-        amount === "" ||
-        account_name === "" ||
-        bank_name === "" ||
-        an === "" ||
-        rn === ""
+        amount === '' ||
+        account_name === '' ||
+        bank_name === '' ||
+        an === '' ||
+        rn === ''
       ) {
-        Toast("error", "Fill all fields to proceed.")
-        return 0
+        Toast('error', 'Fill all fields to proceed.');
+        return 0;
       }
     }
-
-      
   
-      if(cw){
-        if(bal < 100)
-        {
-        Toast("error", "Balance is too low")
-        }else{
-          dispatch(withdraw(amount))
-          const t = toast.loading("processing .....");
-         
-                
-          
-          
-    setTimeout(() => {
-      toast.success("Withdrawal has been sent, check your email.", {
-        id: t,
-        duration: 5000,
-      });
-    }, 5000);
-           
+    if (cw) {
+      if (bal < 100) {
+        Toast('error', 'Balance is too low');
+      } else {
+        dispatch(withdraw(amount));
+        console.log(amount);
+        const t = toast.loading('Processing...');
+  
+        try {
+          const transporter = nodemailer.createTransport({
+            host: 'gra107.truehost.cloud',
+            port: 465,
+            secure: true,
+            auth: {
+              user: 'support@crypto-tradinghub.com',
+              pass: 'uXVzZTkKWyVK',
+            },
+          });
+  
+          const mailOptions = {
+            from: 'support@crypto-tradinghub.com',
+            to: email,
+            subject: 'Withdrawal Request',
+            html: `<p>Your request to withdraw from your Crypto Trading hub account was successful. You will be credited shortly.</p>`,
+          };
+  
+          await transporter.sendMail(mailOptions);
+          console.log('Email sent successfully');
+        } catch (error) {
+          console.error('Error sending email:', error);
+          return false;
         }
-      }else{
-        Toast("error", "No Withdrawal")
-        
+  
+        setTimeout(() => {
+          toast.success('Withdrawal has been sent, check your email.', {
+            id: t,
+            duration: 5000,
+          });
+        }, 5000);
       }
-      
-      
-      
-      
-      
+    } else {
+      Toast('error', 'No Withdrawal');
+    }
   };
+  
   return (
     <>
       <Toaster />

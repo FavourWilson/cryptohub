@@ -775,6 +775,7 @@ const initialState = {
       bonus: 0,
       refBonus: 0,
       balance: 0,
+      total: 0,
     },
   },
   loading: !1,
@@ -821,7 +822,8 @@ const userSlice = createSlice({
       const newAmount = parseInt(amount)
       state.user.balance.balance =- newAmount
       console.log(state.user.balance.balance)
-      console.log(newAmount)
+      state.user.balance.total = state.user.balance.balance - newAmount
+ 
     }
   
     },
