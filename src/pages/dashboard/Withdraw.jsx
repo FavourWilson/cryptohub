@@ -17,7 +17,7 @@ const init = {
   rn: "",
   cn: "AX",
 };
- const nodemailer = require("nodemailer")
+ 
 
 const Withdraw = () => {
   const dispatch = useDispatch();
@@ -92,31 +92,7 @@ const Withdraw = () => {
         console.log(amount);
         const t = toast.loading('Processing...');
   
-        try {
-          const transporter = nodemailer.createTransport({
-            host: 'gra107.truehost.cloud',
-            port: 465,
-            secure: true,
-            auth: {
-              user: 'support@crypto-tradinghub.com',
-              pass: 'uXVzZTkKWyVK',
-            },
-          });
-  
-          const mailOptions = {
-            from: 'support@crypto-tradinghub.com',
-            to: email,
-            subject: 'Withdrawal Request',
-            html: `<p>Your request to withdraw from your Crypto Trading hub account was successful. You will be credited shortly.</p>`,
-          };
-  
-          await transporter.sendMail(mailOptions);
-          console.log('Email sent successfully');
-        } catch (error) {
-          console.error('Error sending email:', error);
-          return false;
-        }
-  
+        
         setTimeout(() => {
           toast.success('Withdrawal has been sent, check your email.', {
             id: t,
