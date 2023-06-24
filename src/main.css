@@ -7,3 +7,8 @@
     src:local("Futura"), url("./fonts/Futura\ Bold\ font.ttf");
     font-weight: bold;
 }
+@font-face {
+    font-family: "Poliphilus";
+    src:local("poliphilus"), url("./fonts/PoliphilusMTStd-Regular.otf");
+    font-weight: bold;
+}

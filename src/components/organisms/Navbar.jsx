@@ -43,7 +43,7 @@ const Navbar = (props) => {
         <div className="inline-block lg:hidden">
           <Text
             type="h5"
-            className="font-bold pl-5 uppercase text-lg lg:text-lg -ml-6 text-white  EBfont"
+            className="font-Poliphilus font-bold pl-5 uppercase text-lg lg:text-lg -ml-6 text-white  EBfont"
           >
             Crypto-TradingHub
           </Text>

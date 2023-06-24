@@ -303,6 +303,7 @@ export default {
         fontFamily: {
           poppins: ["Poppins", "sans-serif"],
           dm: ["DM Sans", "sans-serif"],
+          Poliphilus:["Poliphilus"]
         },
         boxShadow: {
           "3xl": "14px 17px 40px 4px",
