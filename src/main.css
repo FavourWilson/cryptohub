@@ -9,6 +9,6 @@
 }
 @font-face {
     font-family: "Poliphilus";
-    src:local("poliphilus"), url("./fonts/PoliphilusMTStd-Regular.otf");
+    src:local("poliphili"), url("./fonts/Poliphili.ttf");
     font-weight: bold;
 }
