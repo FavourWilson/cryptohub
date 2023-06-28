@@ -29,7 +29,7 @@ const Nav = () => {
                 />{" "}
                 <Text
                   type="h1"
-                  className="font-bold font-Poliphilus uppercase text-lg lg:text-4xl -ml-6 text-main"
+                  className="font-bold font-garmond uppercase text-lg lg:text-4xl -ml-6 text-main"
                 >
                   Crypto-TradingHub
                 </Text>
