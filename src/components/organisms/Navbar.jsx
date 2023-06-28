@@ -43,7 +43,7 @@ const Navbar = (props) => {
         <div className="flex justify-self-center lg:hidden">
           <Text
             type="h5"
-            className="font-Poliphilus font-bold pl-5 uppercase text-lg lg:text-lg -ml-6 text-white  EBfont"
+            className="font-garmond font-bold pl-5 uppercase text-lg lg:text-lg -ml-6 text-white  EBfont"
           >
             Crypto-TradingHub
           </Text>
