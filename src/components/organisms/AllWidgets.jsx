@@ -27,7 +27,7 @@ const Icon = ({ img, alt}) => (
       <Widget
         icon={<Icon img={Images.refBonus} alt="Ref Bonus" />}
         title={"Ref Bonus"}
-        subtitle={`$${user.balance.refBonus}`}
+        subtitle={`$${user.balance.refBonus ?? 0.00}`}
       />
       <Widget
         icon={<Icon img={Images.balance} alt="Balance" />}

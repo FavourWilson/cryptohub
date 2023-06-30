@@ -775,7 +775,6 @@ const initialState = {
       bonus: 0,
       refBonus: 0,
       balance: 0,
-      total: 0,
     },
   },
   loading: !1,
@@ -816,17 +815,22 @@ const userSlice = createSlice({
     resetTransaction: (state) => {
       state.transaction = {};
     },
-
-    withdraw: (state, action) => {
+   withdraw: (state, action) => {
       const amount = action.payload
       const newAmount = parseInt(amount)
+      state.user.balance.balance =- newAmount
+      console.log(state.user.balance.balance)
       state.user.balance.total = state.user.balance.balance - newAmount
-      
+ 
     }
   
     },
 
-  
+
+
+
+
+
   extraReducers: (builder) => {
     builder
       .addCase(GetWallet.pending, (state) => {

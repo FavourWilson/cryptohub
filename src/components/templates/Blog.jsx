@@ -100,54 +100,7 @@ const Blog = () => {
                   ></div>
                 </SwiperSlide>
 
-                 <SwiperSlide>
-                  <div  className="relative">
-                    <img
-                      className="object-cover object-center w-full h-64 rounded-lg lg:h-80"
-                      src={img1}
-                      alt=""
-                    />
-
-                    <div className="absolute bottom-0 flex p-3 bg-white rounded-tr-lg rounded-bl-lg ">
-                      {/* <img
-                        className="object-cover object-center w-10 h-10 rounded-full"
-                        src={Images.person1}
-                        alt=""
-                      /> */}
-
-                      <div className="mx-4">
-                        <Text
-                          type="h1"
-                          className="text-sm text-gray-700 font-bold"
-                        >
-                          Admin
-                        </Text>
-                        <Text
-                          type="p"
-                          className="text-sm text-gray-500 font-semibold"
-                        >
-                        June 10,2023
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-
-                  <Text
-                    type="h1"
-                    className="mt-6 text-xl font-semibold text-gray-800"
-                  >
-                    Binance.US suspends USD deposits as senators call for DoJ investigation
-                  </Text>
-
-                  <hr className="w-32 my-6 text-minorDark" />
-
-                  <Text type="p" className="text-sm text-gray-500">
-Two prominent U.S. senators are calling for the Justice Department to investigate Binance over false statements the company made to lawmakers on March 1 when it responded to a Congressional inquiry about its business practices. Shortly thereafter, Binance.US announced that it would be losing its banking partners, forcing it to suspend USD deposits and withdrawals.                  </Text>
-
-                  <div
-                    className="inline-block mt-4 text-main underline hover:text-minor Transform"
-                  ></div>
-                </SwiperSlide>
+                
                  <SwiperSlide>
                   <div  className="relative">
                     <img
@@ -262,54 +215,7 @@ To combat scammers, CBA will soon impose a monthly transfer restriction of AUD 1
                   ></div>
                 </div>
 
-                 <div>
-                  <div  className="relative">
-                    <img
-                      className="object-cover object-center w-full h-64 rounded-lg lg:h-80"
-                      src={img1}
-                      alt=""
-                    />
-
-                    <div className="absolute bottom-0 flex p-3 bg-white rounded-tr-lg rounded-bl-lg ">
-                      {/* <img
-                        className="object-cover object-center w-10 h-10 rounded-full"
-                        src={Images.person1}
-                        alt=""
-                      /> */}
-
-                      <div className="mx-4">
-                        <Text
-                          type="h1"
-                          className="text-sm text-gray-700 font-bold"
-                        >
-                          Admin
-                        </Text>
-                        <Text
-                          type="p"
-                          className="text-sm text-gray-500 font-semibold"
-                        >
-                        June 10,2023
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-
-                  <Text
-                    type="h1"
-                    className="mt-6 text-xl font-semibold text-gray-800"
-                  >
-                    Binance.US suspends USD deposits as senators call for DoJ investigation
-                  </Text>
-
-                  <hr className="w-32 my-6 text-minorDark" />
-
-                  <Text type="p" className="text-sm text-gray-500">
-Two prominent U.S. senators are calling for the Justice Department to investigate Binance over false statements the company made to lawmakers on March 1 when it responded to a Congressional inquiry about its business practices. Shortly thereafter, Binance.US announced that it would be losing its banking partners, forcing it to suspend USD deposits and withdrawals.                  </Text>
-
-                  <div
-                    className="inline-block mt-4 text-main underline hover:text-minor Transform"
-                  ></div>
-                </div>
+                 
                  <div>
                   <div  className="relative">
                     <img
