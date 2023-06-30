@@ -2,6 +2,7 @@ import { Images } from "../../assets/images"
 import Widget from "./Widget"
 
 const AllWidgets = ({ user }) => {
+  const total = user.balance.deposit + user.balance.earning + user.balance.bonus + user.balance.total;
 
 const Icon = ({ img, alt}) => (
     <img src={img} alt={alt} className="w-7 h-7"/>
@@ -31,7 +32,7 @@ const Icon = ({ img, alt}) => (
       <Widget
         icon={<Icon img={Images.balance} alt="Balance" />}
         title={"Balance"}
-        subtitle={`$${user.balance.balance}`}
+        subtitle={`$${total}`}
       />
        <Widget
         icon={<Icon img={Images.balance} alt="Balance" />}
