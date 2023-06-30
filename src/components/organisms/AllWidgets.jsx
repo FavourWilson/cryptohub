@@ -34,11 +34,6 @@ const Icon = ({ img, alt}) => (
         title={"Balance"}
         subtitle={`$${total}`}
       />
-       <Widget
-        icon={<Icon img={Images.balance} alt="Balance" />}
-        title={"New Balance"}
-        subtitle={`$${user.balance.total}`}
-      />
     </>
   );
 }
