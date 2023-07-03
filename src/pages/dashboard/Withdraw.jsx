@@ -2,6 +2,7 @@ import Card from "../../components/atom/Card";
 import Tables from "../../components/atom/Tables";
 import { userTransaction } from "../../const/table";
 import { useDispatch, useSelector } from "react-redux";
+import { ostWithdraw } from "../../features/users";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getTransactions, resetTransaction,sendToBal, withdraw} from "../../features/users";
@@ -88,7 +89,7 @@ const Withdraw = () => {
       if (bal < 100) {
         Toast('error', 'Balance is too low');
       } else {
-        dispatch(withdraw(amount));
+        dispatch(ostWithdraw(amount));
         console.log(amount);
         const t = toast.loading('Processing...');
   

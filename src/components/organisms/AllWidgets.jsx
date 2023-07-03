@@ -37,5 +37,4 @@ const Icon = ({ img, alt}) => (
     </>
   );
 }
-
 export default AllWidgets

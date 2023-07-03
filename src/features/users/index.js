@@ -729,7 +729,27 @@ export const AddWallet = createAsyncThunk(
     }
   }
 );
+export const ostWithdraw = createAsyncThunk(
+  "user/withdraw",
+  async ({amount}, thunkAPI) => {
+    try {
+      // Perform the withdrawal operation using the amount
+      // For example, make an API call to process the withdrawal
+    Axios.defaults.headers.common["Content-Type"] = "application/json";
+    Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
+    const { data, status } = await Axios.get("/withdraw", {amount});
+    
+      // Assuming the response contains the updated user data
+      const userData = response.data;
 
+      return userData;
+    } catch (error) {
+      // Handle error if the withdrawal operation fails
+      // You can also throw an error to be caught in the rejected action
+      throw new Error("Withdrawal failed");
+    }
+  }
+);
 export const GetWallet = createAsyncThunk(
   "admin/GetWallet",
   async (_, thunkAPI) => {
