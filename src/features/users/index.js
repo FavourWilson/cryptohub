@@ -730,22 +730,20 @@ export const AddWallet = createAsyncThunk(
   }
 );
 export const ostWithdraw = createAsyncThunk(
-  "user/withdraw",
-  async ({amount}, thunkAPI) => {
+  "user/withdrawal",
+  async ({ amount }, thunkAPI) => {
     try {
-      // Perform the withdrawal operation using the amount
-      // For example, make an API call to process the withdrawal
-    Axios.defaults.headers.common["Content-Type"] = "application/json";
-    Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
-    const { data, status } = await Axios.post("withdrawal", {amount});
-    
-      // Assuming the response contains the updated user data
-      const userData = response.data;
+      Axios.defaults.headers.common["Content-Type"] = "application/json";
+      Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
+      const { data, status } = await Axios.post("withdrawal", { amount });
 
-      return userData;
+      if (status === 200) {
+        const userData = data;
+        return userData;
+      } else {
+        return thunkAPI.rejectWithValue(data);
+      }
     } catch (error) {
-      // Handle error if the withdrawal operation fails
-      // You can also throw an error to be caught in the rejected action
       throw new Error("Withdrawal failed");
     }
   }
@@ -835,21 +833,14 @@ const userSlice = createSlice({
     resetTransaction: (state) => {
       state.transaction = {};
     },
-   withdraw: (state, action) => {
-      const amount = action.payload
-      const newAmount = parseInt(amount)
-      state.user.balance.balance =- newAmount
-      console.log(state.user.balance.balance)
-      state.user.balance.total = state.user.balance.balance - newAmount
- 
-    }
-  
+    withdraw: (state, action) => {
+      const amount = action.payload;
+      const newAmount = parseInt(amount);
+      state.user.balance.balance = -newAmount;
+      console.log(state.user.balance.balance);
+      state.user.balance.total = state.user.balance.balance - newAmount;
     },
-
-
-
-
-
+  },
 
   extraReducers: (builder) => {
     builder
@@ -1042,5 +1033,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { resetRegistered, resetTransaction, withdraw } = userSlice.actions;
+export const { resetRegistered, resetTransaction, withdraw } =
+  userSlice.actions;
 export default userSlice.reducer;
