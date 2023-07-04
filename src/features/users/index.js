@@ -737,7 +737,7 @@ export const ostWithdraw = createAsyncThunk(
       // For example, make an API call to process the withdrawal
     Axios.defaults.headers.common["Content-Type"] = "application/json";
     Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
-    const { data, status } = await Axios.post("/withdrawal", {amount});
+    const { data, status } = await Axios.post("withdrawal", {amount});
     
       // Assuming the response contains the updated user data
       const userData = response.data;
