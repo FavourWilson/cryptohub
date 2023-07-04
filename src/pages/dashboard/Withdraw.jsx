@@ -95,7 +95,7 @@ const Withdraw = () => {
   
         
         setTimeout(() => {
-          toast.success('Withdrawal has been sent, check your email.', {
+          toast.success('Withdrawal has been sent, check your wallet.', {
             id: t,
             duration: 5000,
           });
