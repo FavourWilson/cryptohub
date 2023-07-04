@@ -89,7 +89,7 @@ const Withdraw = () => {
       if (bal < 100) {
         Toast('error', 'Balance is too low');
       } else {
-       let amt = dispatch(ostWithdraw(amount));
+       let amt = dispatch(ostWithdraw({amount}));
         console.log(amt);
         const t = toast.loading('Processing...');
   
