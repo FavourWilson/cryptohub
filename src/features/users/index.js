@@ -137,7 +137,7 @@ export const Register = createAsyncThunk(
     try {
       Axios.defaults.headers.common["Content-Type"] = "application/json";
       Axios.defaults.headers.common["Authorization"] = "";
-      const { data, status } = await Axios.post(`auth/register`, body);
+      const { data, status } = await Axios.post(`register`, body);
       if (status === 201) {
         const { dispatch } = thunkAPI;
 
@@ -190,7 +190,7 @@ export const checkAuth = createAsyncThunk(
       token: token(),
     };
     try {
-      const { data, status } = await Axios.post(`auth/verify/`, body);
+      const { data, status } = await Axios.post(`verify/`, body);
 
       if (status === 200) {
         const { dispatch } = thunkAPI;
