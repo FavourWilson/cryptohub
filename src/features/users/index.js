@@ -27,7 +27,7 @@ export const login = createAsyncThunk(
         };
 
         try {
-          let { data, status } = await Axios.post(`auth/`, body);
+          let { data, status } = await Axios.post(`/`, body);
           if (status === 200) {
             const { dispatch } = thunkAPI;
 
