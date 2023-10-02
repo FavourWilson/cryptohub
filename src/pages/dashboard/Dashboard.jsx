@@ -21,7 +21,7 @@ const Dashboard = () => {
       isAdmin = true
     }
     console.log(isAdmin)
-  }, [ch]);
+  }, []);
 
   const { history, user, allTransaction } = useSelector((state) => state.user);
 
