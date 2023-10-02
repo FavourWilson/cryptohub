@@ -38,7 +38,7 @@ export const login = createAsyncThunk(
             // localStorage.setItem("refresh", data.refresh);
 
             const res = await dispatch(getUser());
-
+              initialState.isAdmin = true
             return data;
           } else {
             return thunkAPI.rejectWithValue(data);
