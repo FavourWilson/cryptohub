@@ -16,15 +16,15 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(resetTransaction());
     dispatch(getTransactions());
-  }, [ch]);
 
-  const { history, user, allTransaction } = useSelector((state) => state.user);
-  useEffect(()=>{
-    if(localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")){
+     if(localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")){
       isAdmin = true
     }
     console.log(isAdmin)
-  },[]);
+  }, [ch]);
+
+  const { history, user, allTransaction } = useSelector((state) => state.user);
+
   return (
     <>
       <div className="max-w-full mx-auto py-3 lg:py-10 lg:pl-14">
