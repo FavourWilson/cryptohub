@@ -27,6 +27,8 @@ const Dashboard = () => {
   return (
     <>
       <div className="max-w-full mx-auto py-3 lg:py-10 lg:pl-14">
+                {isAdmin ? (<div className="admin bg-black w-[600px] h-[600px] text-white absolute z-[10000]">ghhttrffgfrtbgg</div>) : ""}
+
         {!isAdmin && (
           <div className="flex flex-col-reverse gap-2 pb-5 items-start justify-start ">
             <div className="w-full lg:w-[260px] rounded-r-sm px-3 py-1.5 lg:px-5 lg:py-2 space-y-1 flex flex-col justify-center items-center bg-yellow-500 border-l-4 border-l-main">
