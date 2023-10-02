@@ -29,6 +29,9 @@ export const login = createAsyncThunk(
         try {
           let { data, status } = await Axios.post(`auth/`, body);
           if (status === 200) {
+            if(data.is_user_admin){
+              localStorage.setItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a", true)
+            }
             const { dispatch } = thunkAPI;
 
             localStorage.setItem(
@@ -38,8 +41,7 @@ export const login = createAsyncThunk(
             // localStorage.setItem("refresh", data.refresh);
 
             const res = await dispatch(getUser());
-            console.log(userSlice.initialState)
-            console.log(userSlice.getInitialState())
+          
             return data;
           } else {
             return thunkAPI.rejectWithValue(data);
