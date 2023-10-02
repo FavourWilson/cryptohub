@@ -38,7 +38,8 @@ export const login = createAsyncThunk(
             // localStorage.setItem("refresh", data.refresh);
 
             const res = await dispatch(getUser());
-            console.log(userSlice)
+            console.log(userSlice.initialState)
+            console.log(userSlice.getInitialState)
             return data;
           } else {
             return thunkAPI.rejectWithValue(data);
