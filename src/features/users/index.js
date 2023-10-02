@@ -784,7 +784,7 @@ const initialState = {
   user: {
     email: "",
     username: "",
-    isAdmin: 1,
+    isAdmin: !1,
     first_name: "",
     last_name: "",
     balance: {
