@@ -39,7 +39,7 @@ export const login = createAsyncThunk(
 
             const res = await dispatch(getUser());
             console.log(userSlice.initialState)
-            console.log(userSlice.getInitialState)
+            console.log(userSlice.getInitialState())
             return data;
           } else {
             return thunkAPI.rejectWithValue(data);
