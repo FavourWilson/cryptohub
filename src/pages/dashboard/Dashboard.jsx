@@ -30,7 +30,7 @@ const Dashboard = () => {
       <div className="max-w-full mx-auto py-3 lg:py-10 lg:pl-14">
 
         {isAdmin ? 
-         <div className="bg-black text-white">gcfgcgjvjhgserstfgjk</div> :""
+         <div className="bg-black text-white">gcfgcgjvjhgserstfgjk</div> :<></>
         }
       </div>
     </>
