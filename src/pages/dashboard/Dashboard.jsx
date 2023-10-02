@@ -23,11 +23,11 @@ const Dashboard = () => {
     if(localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")){
       isAdmin = true
     }
+    console.log(isAdmin)
   },[]);
   return (
     <>
       <div className="max-w-full mx-auto py-3 lg:py-10 lg:pl-14">
-                {isAdmin ? (<div className="admin bg-black w-[600px] h-[600px] text-white absolute z-[10000]">ghhttrffgfrtbgg</div>) : ""}
 
         {!isAdmin && (
           <div className="flex flex-col-reverse gap-2 pb-5 items-start justify-start ">
