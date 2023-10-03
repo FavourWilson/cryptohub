@@ -12,13 +12,13 @@ import Transactions from "../admin/Transactions";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const [ch] = useState(!1);
-   let isAdmin = false;
+  const [isAdmin,setIsAdmin] = useState(false);
   useEffect(() => {
     dispatch(resetTransaction());
     dispatch(getTransactions());
 
      if(localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")){
-      isAdmin = true
+      setIsAdmin(true)
     }
     console.log(isAdmin)
   }, [ch]);
