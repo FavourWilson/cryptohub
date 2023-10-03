@@ -21,11 +21,11 @@ export function SidebarLinks({ routes, adminLinks }) {
   };
 
   const createLinks = (routes) => {
-    if (!user.isAdmin) {
+    if (!isAdmin) {
       return routes.map((route, index) => {
         if (
           route.layout === "/dashboard/" ||
-          (route.layout === "/dashboard" && !user.isAdmin)
+          (route.layout === "/dashboard" && !isAdmin)
         ) {
           return (
             <Link key={index} to={route.layout + route.path}>
@@ -68,7 +68,7 @@ export function SidebarLinks({ routes, adminLinks }) {
       });
     } else {
       return adminLinks.map((route, index) => {
-        if (route.layout === "/dashboard/admin" && user.isAdmin) {
+        if (route.layout === "/dashboard/admin" && isAdmin) {
           return (
             <Link key={index} to={route.layout + "/" + route.path}>
               <div className="relative mb-3 flex hover:cursor-pointer">
