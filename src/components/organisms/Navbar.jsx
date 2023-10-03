@@ -9,7 +9,7 @@ import {
 } from "react-icons/io";
 import avatar from "../../assets/images/avatars/avatar4.png";
 import Text from "../atom/Text";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Icons } from "../../assets/images";
 import { useSelector, useDispatch } from "react-redux";
 import { Logout as logout } from "../../features/users";
@@ -21,7 +21,7 @@ const Navbar = (props) => {
   const [darkmode, setDarkmode] = useState(false);
 
   const { user } = useSelector((state) => state.user);
-  
+  const [isAdmin, setIsAdmin] = useState(false);
   const Logout = async () => {
     const res = await dispatch(logout())
     if (res.meta.requestStatus.toLowerCase() === "fulfilled") { 
@@ -29,6 +29,11 @@ const Navbar = (props) => {
     }
   }
 
+  useEffect(()=>{
+     if(localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")){
+      setIsAdmin(true)
+    }
+  }, [])
   return (
     <nav className="lg:ml-1 sticky top-1 lg:top-4 z-40 flex flex-col-reverse lg:flex-row flex-wrap items-center justify-end rounded-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
       
