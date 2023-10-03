@@ -84,7 +84,7 @@ const Dashboard = () => {
               </div>
                 )}
               <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-              {isAdmin && (
+              {!!!isAdmin && (
                 <Tables
                   show={!1}
                   title="All Users"
