@@ -4,7 +4,7 @@ import { Icons } from "../../assets/images";
 import { MdSpaceDashboard  } from "react-icons/md";
 import { BiMoneyWithdraw  } from "react-icons/bi";
 import { GrLineChart  } from "react-icons/gr";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 import SidebarLinks from "../atom/Links";
 import Text from "../atom/Text";
@@ -89,9 +89,11 @@ const Sidebar = ({ open, onClose }) => {
       },
     ];
 
-     if(localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")){
+  useEffect(()=>{   
+  if(localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")){
       setIsAdmin(true)
     }
+  }, []);
   return (
     <div
       className={`sm:none duration-175 linear fixed lg:mr-12 !z-50 flex min-h-full flex-col bg-minor pb-10 shadow-2xl shadow-white/5 transition-all dark:!bg-navy-800 dark:text-white md:!z-50 lg:!z-50 xl:!z-0 ${
