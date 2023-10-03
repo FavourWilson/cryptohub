@@ -1,13 +1,20 @@
 import { Link, useLocation } from "react-router-dom";
 import DashIcon from "./Icons/DashIcon";
 import { useSelector } from "react-redux";
+import {useState, useEffect} from "react";
 // chakra imports
 
 export function SidebarLinks({ routes, adminLinks }) {
   // Chakra color mode
   let location = useLocation();
+  const [isAdmin, setIsAdmin] = useState(false);
   const { user } = useSelector((state) => state.user);
 
+  useEffect(()=>{   
+  if(localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")){
+      setIsAdmin(true)
+    }
+  }, []);
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
     return location.pathname === routeName;
