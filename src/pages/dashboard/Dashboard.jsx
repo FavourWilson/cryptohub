@@ -28,8 +28,8 @@ const Dashboard = () => {
   return (
     <>
       <div className="max-w-full mx-auto py-3 lg:py-10 lg:pl-14">
-        
-       
+        <p className="">Hello World</p>
+       <p>My name is {isAdmin}</p>
       </div>
     </>
   );
