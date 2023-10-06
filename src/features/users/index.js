@@ -606,7 +606,7 @@ export const blockUser = createAsyncThunk(
     try {
       Axios.defaults.headers.common["Content-Type"] = "multipart/form-data";
       Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
-      const { data, status } = await Axios.delete("admin/block-user", body);
+      const { data, status } = await Axios.post("admin/block-user", body);
       if (status === 200) {
         return data;
       } else {
