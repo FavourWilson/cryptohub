@@ -8,11 +8,7 @@ const ViewUser = () => {
     const { admin } = useSelector((state) => state.user);
     const { user } = useParams();
     const data = admin.allUsers[user]
-
-    useEffect(()=>{
-
-        console.log(data);
-    },[])
+    console.log(data)
   return (
     <>
         <div className='py-10'>
