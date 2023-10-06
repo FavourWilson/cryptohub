@@ -8,7 +8,6 @@ const ViewUser = () => {
     const { admin } = useSelector((state) => state.user);
     const { user } = useParams();
     const data = admin.allUsers[user]
-    console.log(data)
   return (
     <>
         <div className='py-10'>
