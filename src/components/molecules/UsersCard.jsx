@@ -13,7 +13,7 @@ const UsersCard = ({ index, data }) => {
   
   const BlockUser = async (e) => {
     e.preventDefault();
-    console.log("data",data);
+    
     setOpen(!open);
     const res = await dispatch(blockUser({ uuid: data.username.username }));
     if (res.meta.requestStatus.toLowerCase() === "rejected") {
