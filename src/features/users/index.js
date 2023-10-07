@@ -602,12 +602,12 @@ export const blockUser = createAsyncThunk(
   "admin/blockUser",
   async ({ uuid }, thunkAPI) => {
     const body = { uuid };
-    console.log(body);
+    console.log("body", body);
     try {
       Axios.defaults.headers.common["Content-Type"] = "multipart/form-data";
       Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
       const { data, status } = await Axios.delete("admin/block-user", body);
-      console.log(data);
+      console.log("data", data);
       if (status === 200) {
         return data;
       } else {
