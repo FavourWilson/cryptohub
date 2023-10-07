@@ -25,6 +25,8 @@ const TransTable = ({ data=[] }) => {
       location.reload();
     }
   };
+
+  console.log("Transtable",data)
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-3">
