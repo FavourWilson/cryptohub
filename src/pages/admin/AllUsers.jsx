@@ -7,6 +7,7 @@ const AllUsers = () => {
   const dispatch = useDispatch();
   const { admin } = useSelector((state) => state.user);
 
+  console.log(admin)
   useEffect(() => {
     dispatch(getUsers())
   }, [])
