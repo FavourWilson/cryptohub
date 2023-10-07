@@ -5,7 +5,7 @@ import { blockUser } from "../../features/users";
 
 const UsersCard = ({ index, data }) => {
   const dispatch = useDispatch();
-
+  console.log("users", data)
   const [open, setOpen] = useState(!!0);
   const onClick = () => {
     setOpen(!open);
