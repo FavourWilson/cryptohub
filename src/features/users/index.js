@@ -17,9 +17,7 @@ export const login = createAsyncThunk(
   "users/login",
   async ({ email, password }, thunkAPI) => {
     try {
-      let { data, status } = await Axios.get(`guser`, {
-        email,
-      });
+     
       if (status === 200) {
         const body = {
           username: data.username,
@@ -32,7 +30,9 @@ export const login = createAsyncThunk(
             if(data.is_user_admin){
               localStorage.setItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a", true)
             }
-            
+             let { data, status } = await Axios.get(`guser`, {
+        email,
+      });
             const { dispatch } = thunkAPI;
 
             localStorage.setItem(
