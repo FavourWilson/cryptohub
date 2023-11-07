@@ -29,7 +29,6 @@ export const login = createAsyncThunk(
               "cfb90493-c364-4ade-820d-b6848bc65f44",
               data.access
             );
-            localStorage.setItem("refresh", data.refresh);
 
             const res = await dispatch(getUser());
           
