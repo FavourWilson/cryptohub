@@ -34,7 +34,6 @@ export const login = createAsyncThunk(
              localStorage.setItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a", true)
 
             }
-             console.log(body)
             const { dispatch } = thunkAPI;
 
             localStorage.setItem(
