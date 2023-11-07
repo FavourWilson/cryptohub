@@ -20,6 +20,7 @@ export const login = createAsyncThunk(
      let { data, status } = await Axios.get(`guser`, {
         email,
       });
+      console.log(data)
       if (status === 200) {
         const body = {
           username: data.username,
@@ -30,7 +31,7 @@ export const login = createAsyncThunk(
           let { data, status } = await Axios.post(`auth/`, body);
           if (status === 200) {
             if(data.is_user_admin){
-          localStorage.setItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a", data.access, true)
+             localStorage.setItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a", true)
 
             }
              
