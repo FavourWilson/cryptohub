@@ -16,18 +16,7 @@ const headers = {
 export const login = createAsyncThunk(
   "users/login",
   async ({ email, password }, thunkAPI) => {
-    try {
-     let { data, status } = await Axios.post(`guser`, {
-        email,
-      });
-      
-      if (status === 200) {
-        const body = {
-          username: data.username,
-          password,
-        };
-
-        try {
+     try {
           let { data, status } = await Axios.post(`auth/`, body);
           if (status === 200) {
             if(data.is_user_admin){
@@ -73,6 +62,19 @@ export const login = createAsyncThunk(
             return thunkAPI.rejectWithValue(errors);
           }
         }
+    
+    try {
+     let { data, status } = await Axios.get(`guser`, {
+        email,
+      });
+      
+      if (status === 200) {
+        const body = {
+          username: data.username,
+          password,
+        };
+
+       
       } else {
         return thunkAPI.rejectWithValue(data);
       }
