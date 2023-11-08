@@ -53,9 +53,11 @@ const Login = () => {
       const res = await dispatch(login({ email, password }));
       if (res.meta.requestStatus.toLowerCase() === "rejected") {
         if (res?.payload?.status === 404) {
+          console.log("56 Toast", res?.payload);
           toast.remove(aX)
           Toast("error", res?.payload?.detail);
         } else {
+          console.log("60 Toast", res?.payload);
           toast.remove(aX)
           Toast("error", res?.payload?.detail);
         }
