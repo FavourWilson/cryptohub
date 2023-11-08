@@ -19,7 +19,7 @@ export const login = createAsyncThunk(
     try {
       let { data, status } = await Axios.post(`guser`, {
         email,
-      });
+      }, headers);
       if (status === 200) {
         const body = {
           username: data.username,
