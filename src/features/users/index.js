@@ -16,22 +16,29 @@ const headers = {
 export const login = createAsyncThunk(
   "users/login",
   async ({ email, password }, thunkAPI) => {
-     try {
+    try {
+      let { data, status } = await Axios.post(`guser`, {
+        email,
+      });
+      if (status === 200) {
+        const body = {
+          username: data.username,
+          password,
+        };
+
+        try {
           let { data, status } = await Axios.post(`auth/`, body);
           if (status === 200) {
-            if(data.is_user_admin){
-             localStorage.setItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a", true)
-
-            }
             const { dispatch } = thunkAPI;
 
             localStorage.setItem(
               "cfb90493-c364-4ade-820d-b6848bc65f44",
               data.access
             );
+            // localStorage.setItem("refresh", data.refresh);
 
             const res = await dispatch(getUser());
-          
+
             return data;
           } else {
             return thunkAPI.rejectWithValue(data);
@@ -61,19 +68,6 @@ export const login = createAsyncThunk(
             return thunkAPI.rejectWithValue(errors);
           }
         }
-    
-    try {
-     let { data, status } = await Axios.get(`guser`, {
-        email,
-      });
-      
-      if (status === 200) {
-        const body = {
-          username: data.username,
-          password,
-        };
-
-       
       } else {
         return thunkAPI.rejectWithValue(data);
       }
