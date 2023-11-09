@@ -69,7 +69,7 @@ const Login = () => {
 
     if (isSuccess) {
       if(data.is_admin){
-        localStorage.setItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a",true);
+        localStorage.setItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a",data.access_token, true);
       }
       Toast("success", "Login Successful");
       localStorage.setItem("cfb90493-c364-4ade-820d-b6848bc65f44", data.access_token);
