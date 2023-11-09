@@ -5,12 +5,14 @@ import { MdSpaceDashboard  } from "react-icons/md";
 import { BiMoneyWithdraw  } from "react-icons/bi";
 import { GrLineChart  } from "react-icons/gr";
 import {useState, useEffect} from 'react';
+import { useLoginMutation } from "../../apis/authApi.apis";
 
 import SidebarLinks from "../atom/Links";
 import Text from "../atom/Text";
 
 const Sidebar = ({ open, onClose }) => {
   const [isAdmin, setIsAdmin] = useState(false);
+   const { data } = useLoginMutation();
   const routes = [
     // icon: <MdOutlineShoppingCart className="h-6 w-6" />,
     {
@@ -126,6 +128,12 @@ const Sidebar = ({ open, onClose }) => {
       {/* Nav item */}
 
       <ul className="mb-auto pt-1">
+        {isAdmin ? 
+          <SidebarLinks adminLinks={adminLink} />
+          : 
+          <SidebarLinks routes={routes} />
+        
+        }
         <SidebarLinks routes={routes} adminLinks={adminLink} />
       </ul>
 
