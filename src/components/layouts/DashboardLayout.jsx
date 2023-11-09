@@ -4,7 +4,7 @@ import { Outlet, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import DashboardFooter from "../templates/DashboardFooter";
 import { getNotification } from "../../features/users";
-
+import { useLoginMutation } from "../../apis/authApi.apis";
 import { useSelector, useDispatch } from "react-redux";
 
 const DashboardLayout = () => {
