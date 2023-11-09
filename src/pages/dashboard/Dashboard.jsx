@@ -18,7 +18,7 @@ const Dashboard = () => {
     dispatch(resetTransaction());
     dispatch(getTransactions());
 
-    if (localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")) {
+    if (localStorage.getItem("access_token")) {
       setIsAdmin(true);
     }
   }, [ch]);
