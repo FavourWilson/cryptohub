@@ -17,14 +17,14 @@ export const login = createAsyncThunk(
   "users/login",
   async ({ email, password }, thunkAPI) => {
     try {
-      let { data, status } = await Axios.get(`guser`, {
-        email,
-      }, headers);
-      if (status === 200) {
-        const body = {
-          username: data.username,
-          password,
-        };
+      // let { data, status } = await Axios.get(`guser`, {
+      //   email,
+      // }, headers);
+      // if (status === 200) {
+      //   const body = {
+      //     username: data.username,
+      //     password,
+      //   };
 
         try {
           let { data, status } = await Axios.post(`auth/`, body);
