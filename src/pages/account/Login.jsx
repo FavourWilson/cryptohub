@@ -73,7 +73,7 @@ const Login = () => {
     if (isError) {
       Toast("error", error);
     }
-  }, [isLoading, isSuccess, error]);
+  }, [isLoading, isSuccess, error, data]);
 
   // if (isAuthenticated) return ;
   return (
