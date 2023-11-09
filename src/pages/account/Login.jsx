@@ -68,7 +68,7 @@ const Login = () => {
     }
 
     if (isSuccess) {
-      if(data.is_admin){
+      if(data.is_admin === true){
         localStorage.setItem("access_token", data.access_token);
         navigate("/dashboard");
       }
