@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const DashboardLayout = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, loading, user } = useSelector((state) => state.user);
+  const {isLoading, isSuccess, } =  useLoginMutation();
 
   
   const routes = [];
@@ -54,7 +54,7 @@ const DashboardLayout = () => {
     }
     return activeNavbar;
   };
-  if (!isAuthenticated && !loading) return <Navigate to="/auth" />;
+  if (!isSuccess && !isLoading) return <Navigate to="/auth" />;
 
   return (
     <>
