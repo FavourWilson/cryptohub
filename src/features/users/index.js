@@ -253,24 +253,24 @@ export const createNotification = createAsyncThunk(
   }
 );
 
-export const getStatus = createAsyncThunk(
-  "users/status",
-  async (_, thunkAPI) => {
-    try {
-      Axios.defaults.headers.common["Content-Type"] = "application/json";
-      Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
-      const { data, status } = await Axios.post("account-status");
-      if (status === 200) {
-        return data;
-      } else {
-        return thunkAPI.rejectWithValue(data);
-      }
-    } catch (err) {
-       return thunkAPI.rejectWithValue(err.response.data);
-      return "";
-    }
-  }
-);
+// export const getStatus = createAsyncThunk(
+//   "users/status",
+//   async (_, thunkAPI) => {
+//     try {
+//       Axios.defaults.headers.common["Content-Type"] = "application/json";
+//       Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
+//       const { data, status } = await Axios.post("account-status");
+//       if (status === 200) {
+//         return data;
+//       } else {
+//         return thunkAPI.rejectWithValue(data);
+//       }
+//     } catch (err) {
+//        return thunkAPI.rejectWithValue(err.response.data);
+//       return "";
+//     }
+//   }
+// );
 
 export const getUsers = createAsyncThunk(
   "admin/getusers",
@@ -790,15 +790,15 @@ const initialState = {
   allTransaction: [],
   history: [],
   refHistory: [],
-  status: [
-    {
-      invested: [0, 0, 0, 0, 0, 0],
-      invested_sum: 0,
-      deposit: [0, 0, 0, 0, 0, 0],
-      deposit_sum: 0,
-      months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-    },
-  ],
+  // status: [
+  //   {
+  //     invested: [0, 0, 0, 0, 0, 0],
+  //     invested_sum: 0,
+  //     deposit: [0, 0, 0, 0, 0, 0],
+  //     deposit_sum: 0,
+  //     months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  //   },
+  // ],
   admin: {
     wallet: { address: "" },
     allUsers: [],
@@ -930,20 +930,20 @@ const userSlice = createSlice({
       .addCase(getUsers.pending, (state) => {
         state.loading = !0;
       })
-      .addCase(getUsers.fulfilled, (state, action) => {
-        state.loading = !1;
-        state.admin.allUsers = action.payload;
-      })
-      .addCase(getUsers.rejected, (state) => {
-        state.loading = !1;
-      })
-      .addCase(getStatus.pending, (state) => {
-        state.loading = !0;
-      })
-      .addCase(getStatus.fulfilled, (state, action) => {
-        state.loading = !1;
-        state.status = action.payload;
-      })
+      // .addCase(getUsers.fulfilled, (state, action) => {
+      //   state.loading = !1;
+      //   state.admin.allUsers = action.payload;
+      // })
+      // .addCase(getUsers.rejected, (state) => {
+      //   state.loading = !1;
+      // })
+      // .addCase(getStatus.pending, (state) => {
+      //   state.loading = !0;
+      // })
+      // .addCase(getStatus.fulfilled, (state, action) => {
+      //   state.loading = !1;
+      //   state.status = action.payload;
+      // })
       .addCase(getStatus.rejected, (state) => {
         state.loading = !1;
       })
