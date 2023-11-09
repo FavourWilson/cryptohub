@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AtSymbol, FingerPrint } from "../../components/atom/Icons";
-import { Navigate } from "react-router-dom";
-import { login, createNotification } from "../../features/users";
 import { useSelector, useDispatch } from "react-redux";
 import { toast, Toaster } from "react-hot-toast";
+import { useLoginMutation } from "../../apis/authApi.apis";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const initial = {
   email: "",
@@ -14,17 +15,20 @@ const initial = {
 const Login = () => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(initial);
-  const { isAuthenticated, loading } = useSelector((state) => state.user);
+  const [signIn, { data, isError, isLoading, isSuccess, error }] =
+    useLoginMutation();
+  // const { isAuthenticated, loading } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const onChange = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value})
-  }
-  const { email, password } = formData
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  
+  const { email, password } = formData;
+
   const Toast = (t, m) => {
     if (t === "success") {
-      toast.success(m);
+      m;
     } else if (t === "info") {
       toast.info(m);
     } else if (t === "error") {
@@ -36,42 +40,42 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    let ce = !0;
 
-    if (email === null || email === "") {
-      Toast("error", "Email is required");
-      ce = !1;
-    }
-    if (password === null || password === "") {
-      Toast("error", "Password is required");
-      ce = !1;
-    }
-
-      const aX = toast.loading("Logging you in...");
-
-    if (ce) {
-      const res = await dispatch(login({ email, password }));
-      if (res.meta.requestStatus.toLowerCase() === "rejected") {
-        if (res?.payload?.status === 404) {
-          console.log("56 Toast", res?.payload);
-          toast.remove(aX)
-          Toast("error", res?.payload?.detail);
-        } else {
-          console.log("60 Toast", res?.payload);
-          toast.remove(aX)
-          Toast("error", res?.payload?.detail);
-        }
-      } else {
-        const msg = "Account login.";
-        const re = await dispatch(
-          createNotification({ message: msg, type: "login" })
-          );
-          toast.remove(aX)
+    if (
+      email === null ||
+      email === "" ||
+      password === null ||
+      password === ""
+    ) {
+      if (email === null || email === "") {
+        Toast("error", "Email is required");
       }
+      if (password === null || password === "") {
+        Toast("error", "Password is required");
+      }
+      return;
     }
+
+    await signIn(formData);
   };
-  
-  if (isAuthenticated) return <Navigate to="/dashboard" />;
+
+  useEffect(() => {
+    if (isLoading) {
+      console.log("Loading...");
+    }
+
+    if (isSuccess) {
+      Toast("success", "Login Successful");
+      localStorage.setItem("access_token", data.access_token);
+      navigate("/dashboard");
+    }
+
+    if (isError) {
+      Toast("error", error);
+    }
+  }, [isLoading, isSuccess, error]);
+
+  // if (isAuthenticated) return ;
   return (
     <>
       <Toaster />
@@ -145,24 +149,15 @@ const Login = () => {
                   </div>
                 </div>
 
-                {loading ? (
-                  <div>
-                    <div
-                      className="cursor-not-allowed inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-minor bg-opacity-50 border border-transparent rounded-md focus:outline-none hover:bg-main focus:bg-main"
-                    >
-                      Log in
-                    </div>
-                  </div>
-                ) : (
-                  <div>
-                    <button
-                      type="submit"
-                      className="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-minor border border-transparent rounded-md focus:outline-none hover:bg-main focus:bg-main"
-                    >
-                      Log in
-                    </button>
-                  </div>
-                )}
+                <div>
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-minor border border-transparent rounded-md focus:outline-none hover:bg-main focus:bg-main"
+                  >
+                    Log in
+                  </button>
+                </div>
 
                 <div className="text-center">
                   <p className="text-base text-gray-600">

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { checkAuth } from "./features/users";
 
 import LandingPageLayout from "./components/layouts/LandingPageLayout";
 import AccountPageLayout from "./components/layouts/AccountPageLayout";
@@ -45,16 +44,6 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const init = async () => {
-      const res = await dispatch(checkAuth());
-      if (res.meta.requestStatus.toLowerCase() === "rejected") {
-        localStorage.removeItem("cfb90493-c364-4ade-820d-b6848bc65f44");
-        location.reload();
-      }
-    };
-
-    init();
-
     if (
       location.pathname.includes("-trading") ||
       location.pathname.includes("/faq") ||
