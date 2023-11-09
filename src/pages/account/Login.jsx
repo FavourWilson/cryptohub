@@ -68,8 +68,8 @@ const Login = () => {
     }
 
     if (isSuccess) {
-      if(data.is_admin === true){
-        localStorage.setItem("access_token", data.access_token);
+      if(data.is_admin){
+        localStorage.setItem("access_token", data.access_token,true);
         navigate("/dashboard");
       }
       Toast("success", "Login Successful");
