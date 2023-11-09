@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { getFaq } from "../landing";
 
 const token = () =>
-  localStorage.getItem("cfb90493-c364-4ade-820d-b6848bc65f44");
+  localStorage.getItem("access_token");
 
 // const headers = {
 //   headers: {
