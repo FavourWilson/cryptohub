@@ -1,4 +1,4 @@
-import TotalSpent from "../../components/organisms/TotalSpent";
+// import TotalSpent from "../../components/organisms/TotalSpent";
 import TradeChart from "../../components/organisms/TradeChart";
 import Tables from "../../components/atom/Tables";
 import { userTransaction } from "../../const/table";
@@ -75,8 +75,8 @@ const Dashboard = () => {
         <div className="space-y-5">
           {!!!isAdmin && (
             <div className="mt-5 grid grid-cols-1 gap-5 h-lg">
-              <TotalSpent />
-            </div>
+{/*               <TotalSpent />
+            </div> */}
           )}
           {!!!isAdmin && (
             <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 h-lg">
