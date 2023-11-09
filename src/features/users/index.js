@@ -6,102 +6,108 @@ import { getFaq } from "../landing";
 const token = () =>
   localStorage.getItem("cfb90493-c364-4ade-820d-b6848bc65f44");
 
-const headers = {
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token()}`,
-  },
-};
+// const headers = {
+//   headers: {
+//     "Content-Type": "application/json",
+//     Authorization: `Bearer ${token()}`,
+//   },
+// };
 
-export const login = createAsyncThunk(
-  "users/login",
-  async ({ email, password }, thunkAPI) => {
-    try {
-      // let { data, status } = await Axios.get(`guser`, {
-      //   email,
-      // }, headers);
-      // if (status === 200) {
-      //   const body = {
-      //     username: data.username,
-      //     password,
-      //   };
+// export const login = createAsyncThunk(
+//   "users/login",
+//   async ({ email, password }, thunkAPI) => {
+//     try {
+//       let { data, status } = await Axios.post(
+//         `guser`,
+//         {
+//           email,
+//         },
+//         headers
+//       );
+//       if (status === 200) {
+//         const body = {
+//           username: data.username,
+//           password,
+//         };
 
-        try {
-          let { data, status } = await Axios.post(`auth/`, body);
-          if (status === 200) {
-            if(data.is_user_admin){
-             localStorage.setItem( data.access_token, true)
+//         try {
+//           let { data, status } = await Axios.post(`auth/`, body);
+//           if (status === 200) {
+//             if (data.is_user_admin) {
+//               localStorage.setItem(
+//                 "e70913ab-4047-48bc-8c33-aa2e7b3aeb2a",
+//                 true
+//               );
+//             }
+//             const { dispatch } = thunkAPI;
 
-            }
-            const { dispatch } = thunkAPI;
+//             localStorage.setItem(
+//               "cfb90493-c364-4ade-820d-b6848bc65f44",
+//               data.access
+//             );
+//             // localStorage.setItem("refresh", data.refresh);
 
-            localStorage.setItem(
-              
-              data.access_token
-            );
-            // localStorage.setItem("refresh", data.refresh);
+//             const res = await dispatch(getUser());
 
-            const res = await dispatch(getUser());
-
-            return data;
-          } else {
-            return thunkAPI.rejectWithValue(data);
-          }
-        } catch (err) {
-          if (err?.response?.status === 400) {
-            const errors = {
-              status: err?.response?.status,
-              statusText: err?.response?.statusText.toUpperCase(),
-              detail: err?.response?.data,
-            };
-            return thunkAPI.rejectWithValue(errors);
-          } else if (err?.message === "Network Error") {
-            const errors = {
-              status: 0,
-              statusText: null,
-              detail:
-                "Unable to precess your request, we are working to Fix this issue.",
-            };
-            return thunkAPI.rejectWithValue(errors);
-          } else {
-            const errors = {
-              status: null,
-              statusText: null,
-              detail: err?.response?.data?.detail,
-            };
-            return thunkAPI.rejectWithValue(errors);
-          }
-        }
-      } else {
-        return thunkAPI.rejectWithValue(data);
-      }
-    } catch (err) {
-      if (err?.response?.status === 404) {
-        const errors = {
-          status: err?.response?.status,
-          statusText: err?.response?.statusText.toUpperCase(),
-          detail: "Invalid credentials",
-        };
-        return thunkAPI.rejectWithValue(errors);
-      } else if (err?.message === "Network Error") {
-        const errors = {
-          status: 0,
-          statusText: null,
-          detail:
-            "Unable to precess your request, we are working to Fix this issue.",
-        };
-        return thunkAPI.rejectWithValue(errors);
-      } else {
-        const errors = {
-          status: null,
-          statusText: null,
-          detail: err?.response?.data?.detail,
-        };
-        return thunkAPI.rejectWithValue(errors);
-      }
-    }
-  }
-);
+//             return data;
+//           } else {
+//             return thunkAPI.rejectWithValue(data);
+//           }
+//         } catch (err) {
+//           if (err?.response?.status === 400) {
+//             const errors = {
+//               status: err?.response?.status,
+//               statusText: err?.response?.statusText.toUpperCase(),
+//               detail: err?.response?.data,
+//             };
+//             return thunkAPI.rejectWithValue(errors);
+//           } else if (err?.message === "Network Error") {
+//             const errors = {
+//               status: 0,
+//               statusText: null,
+//               detail:
+//                 "Unable to precess your request, we are working to Fix this issue.",
+//             };
+//             return thunkAPI.rejectWithValue(errors);
+//           } else {
+//             const errors = {
+//               status: null,
+//               statusText: null,
+//               detail: err?.response?.data?.detail,
+//             };
+//             return thunkAPI.rejectWithValue(errors);
+//           }
+//         }
+//       } else {
+//         return thunkAPI.rejectWithValue(data);
+//       }
+//     } catch (err) {
+//       if (err?.response?.status === 404) {
+//         const errors = {
+//           status: err?.response?.status,
+//           statusText: err?.response?.statusText.toUpperCase(),
+//           detail: "Invalid credentials",
+//         };
+//         return thunkAPI.rejectWithValue(errors);
+//       } else if (err?.message === "Network Error") {
+//         const errors = {
+//           status: 0,
+//           statusText: null,
+//           detail:
+//             "Unable to precess your request, we are working to Fix this issue.",
+//         };
+//         return thunkAPI.rejectWithValue(errors);
+//       } else {
+//         const errors = {
+//           status: null,
+//           statusText: null,
+//           detail: err?.response?.data?.detail,
+//         };
+//         return thunkAPI.rejectWithValue(errors);
+//       }
+//     }
+//   }
+// );
 
 export const Register = createAsyncThunk(
   "users/register",
@@ -186,30 +192,6 @@ export const getUser = createAsyncThunk("app/me", async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(err.response.data);
   }
 });
-
-export const checkAuth = createAsyncThunk(
-  "users/verify",
-  async (_, thunkAPI) => {
-    const body = {
-      token: token(),
-    };
-    try {
-      const { data, status } = await Axios.post(`auth/verify/`, body);
-
-      if (status === 200) {
-        const { dispatch } = thunkAPI;
-
-        dispatch(getUser());
-
-        return data;
-      } else {
-        return thunkAPI.rejectWithValue(data);
-      }
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.response.data);
-    }
-  }
-);
 
 export const logout = createAsyncThunk("users/logout", async (_, thunkAPI) => {
   try {
@@ -984,16 +966,6 @@ const userSlice = createSlice({
       .addCase(getNotification.rejected, (state) => {
         state.loading = !1;
       })
-      .addCase(login.pending, (state) => {
-        state.loading = !0;
-      })
-      .addCase(login.fulfilled, (state) => {
-        state.loading = !1;
-        state.isAuthenticated = !0;
-      })
-      .addCase(login.rejected, (state) => {
-        state.loading = !1;
-      })
       .addCase(getUser.pending, (state) => {
         state.loading = !0;
       })
@@ -1002,16 +974,6 @@ const userSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(getUser.rejected, (state) => {
-        state.loading = !1;
-      })
-      .addCase(checkAuth.pending, (state) => {
-        state.loading = !0;
-      })
-      .addCase(checkAuth.fulfilled, (state) => {
-        state.loading = !1;
-        state.isAuthenticated = !0;
-      })
-      .addCase(checkAuth.rejected, (state) => {
         state.loading = !1;
       })
       .addCase(logout.pending, (state) => {
