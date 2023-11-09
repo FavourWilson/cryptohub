@@ -13,6 +13,7 @@ const token = () =>
 //   },
 // };
 
+<<<<<<< HEAD
 // export const login = createAsyncThunk(
 //   "users/login",
 //   async ({ email, password }, thunkAPI) => {
@@ -40,6 +41,26 @@ const token = () =>
 //               );
 //             }
 //             const { dispatch } = thunkAPI;
+=======
+export const login = createAsyncThunk(
+  "users/login",
+  async ({ email, password }, thunkAPI) => {
+    try {
+      // let { data, status } = await Axios.get(`guser`, {
+      //   email,
+      // }, headers);
+      // if (status === 200) {
+      //   const body = {
+      //     username: data.username,
+      //     password,
+      //   };
+
+        try {
+          let { data, status } = await Axios.post(`auth/`, body);
+          if (status === 200) {
+            if(data.is_user_admin){
+             localStorage.setItem( data.access_token, true)
+>>>>>>> 5f80a0741ee565abcd0423db09fa2997a08fa391
 
 //             localStorage.setItem(
 //               "cfb90493-c364-4ade-820d-b6848bc65f44",
@@ -47,7 +68,15 @@ const token = () =>
 //             );
 //             // localStorage.setItem("refresh", data.refresh);
 
+<<<<<<< HEAD
 //             const res = await dispatch(getUser());
+=======
+            localStorage.setItem(
+              
+              data.access_token
+            );
+            // localStorage.setItem("refresh", data.refresh);
+>>>>>>> 5f80a0741ee565abcd0423db09fa2997a08fa391
 
 //             return data;
 //           } else {
