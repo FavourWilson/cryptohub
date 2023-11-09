@@ -38,25 +38,7 @@ const Login = () => {
     }
   };
 
-   useEffect(() => {
-    if (isLoading) {
-      console.log("Loading...");
-    }
-
-    if (isSuccess) {
-      if(data.is_admin){
-        localStorage.setItem("access_token", data.access_token);
-        navigate("/dashboard");
-      }
-      Toast("success", "Login Successful");
-      localStorage.setItem("access_token", data.access_token);
-      navigate("/dashboard");
-    }
-
-    if (isError) {
-      Toast("error", error);
-    }
-  }, [isLoading, isSuccess, error, data]);
+ 
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -79,6 +61,26 @@ const Login = () => {
     await signIn(formData);
   };
 
+
+    useEffect(() => {
+    if (isLoading) {
+      console.log("Loading...");
+    }
+
+    if (isSuccess) {
+      if(data.is_admin){
+        localStorage.setItem("access_token", data.access_token);
+        navigate("/dashboard");
+      }
+      Toast("success", "Login Successful");
+      localStorage.setItem("access_token", data.access_token);
+      navigate("/dashboard");
+    }
+
+    if (isError) {
+      Toast("error", error);
+    }
+  }, [isLoading, isSuccess, error, data]);
  
 
   // if (isAuthenticated) return ;
