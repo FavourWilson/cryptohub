@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const DashboardLayout = () => {
   const dispatch = useDispatch();
-  const {isLoading, isSuccess, } =  useLoginMutation();
+  const {isLoading, isSuccess } =  useLoginMutation();
 
   
   const routes = [];
