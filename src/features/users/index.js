@@ -259,7 +259,7 @@ export const getStatus = createAsyncThunk(
     try {
       Axios.defaults.headers.common["Content-Type"] = "application/json";
       Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
-      const { data, status } = await Axios.post("account-status");
+      // const { data, status } = await Axios.post("account-status");
       if (status === 200) {
         return data;
       } else {
