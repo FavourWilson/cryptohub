@@ -128,12 +128,7 @@ const Sidebar = ({ open, onClose }) => {
       {/* Nav item */}
 
       <ul className="mb-auto pt-1">
-        {!!!isAdmin ? 
-          <SidebarLinks adminLinks={adminLink} />
-          : 
-          <SidebarLinks routes={routes} />
-        
-        }
+        <SidebarLinks routes={routes} adminLinks={adminLink} />
       </ul>
 
       {/* Free Horizon Card
