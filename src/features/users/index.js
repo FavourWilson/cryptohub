@@ -937,16 +937,16 @@ const userSlice = createSlice({
       .addCase(getUsers.rejected, (state) => {
         state.loading = !1;
       })
-      // .addCase(getStatus.pending, (state) => {
-      //   state.loading = !0;
-      // })
-      // .addCase(getStatus.fulfilled, (state, action) => {
-      //   state.loading = !1;
-      //   state.status = action.payload;
-      // })
-      // .addCase(getStatus.rejected, (state) => {
-      //   state.loading = !1;
-      // })
+      .addCase(getStatus.pending, (state) => {
+        state.loading = !0;
+      })
+      .addCase(getStatus.fulfilled, (state, action) => {
+        state.loading = !1;
+        state.status = action.payload;
+      })
+      .addCase(getStatus.rejected, (state) => {
+        state.loading = !1;
+      })
       .addCase(createNotification.pending, (state) => {
         state.loading = !0;
       })
