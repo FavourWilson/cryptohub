@@ -7,7 +7,7 @@ import {useEffect} from 'react'
 const ViewUser = () => {
     const { admin } = useSelector((state) => state.user);
     const { user } = useParams();
-    const data = admin.allUsers[user]
+    const data = admin.allUsers
     console.log(data);
     console.log(user);
   return (
