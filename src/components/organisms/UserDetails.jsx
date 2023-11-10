@@ -3,7 +3,7 @@ import QuickAction from "../molecules/QuickAction";
 
 const UserDetails = ({ data }) => {
     const [show, setShow] = useState(!!0)
-  console.log(data)
+  console.log("This is ",data)
     const SetShow = () => {
         setShow(!show)
     }
