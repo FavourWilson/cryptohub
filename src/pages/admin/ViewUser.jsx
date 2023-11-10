@@ -9,6 +9,7 @@ const ViewUser = () => {
     const { user } = useParams();
     const data = admin.allUsers[user]
     console.log(data);
+    console.log(user);
   return (
     <>
         <div className='py-10'>
