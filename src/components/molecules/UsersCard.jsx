@@ -77,7 +77,7 @@ const UsersCard = ({ index, data }) => {
             {data.username.first_name} {data.username.last_name}
           </h5>
           <span className="text-sm text-gray-500 dark:text-gray-400">
-            {data.email}
+            {data.username.email}
           </span>
           <div className="flex mt-4 space-x-3 md:mt-6">
             <Link
