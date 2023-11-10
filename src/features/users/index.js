@@ -6,12 +6,12 @@ import { getFaq } from "../landing";
 const token = () =>
   localStorage.getItem("access_token");
 
-// const headers = {
-//   headers: {
-//     "Content-Type": "application/json",
-//     Authorization: `Bearer ${token()}`,
-//   },
-// };
+const headers = {
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token()}`,
+  },
+};
 
 // export const login = createAsyncThunk(
 //   "users/login",
