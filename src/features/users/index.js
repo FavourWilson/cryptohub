@@ -583,8 +583,8 @@ export const SetBalance = createAsyncThunk(
 
 export const blockUser = createAsyncThunk(
   "admin/blockUser",
-  async ({ id}, thunkAPI) => {
-    const body = { id };
+  async ({ uuid}, thunkAPI) => {
+    const body = { uuid };
     console.log("body", body);
     try {
       Axios.defaults.headers.common["Content-Type"] = "multipart/form-data";
