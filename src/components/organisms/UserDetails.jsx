@@ -1,5 +1,5 @@
 import { useState } from "react";
-import QuickAction from "../molecules/QuickAction";
+// import QuickAction from "../molecules/QuickAction";
 
 const UserDetails = ({ data }) => {
     const [show, setShow] = useState(!!0)
@@ -45,7 +45,7 @@ const UserDetails = ({ data }) => {
           </div>
         </dl>
           </div>
-          <QuickAction />
+{/*           <QuickAction /> */}
     </>
   );
 };
