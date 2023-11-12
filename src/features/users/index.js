@@ -151,7 +151,7 @@ export const Register = createAsyncThunk(
       if (status === 201) {
         const { dispatch } = thunkAPI;
 
-        await dispatch(login({ email, password }));
+        //await dispatch(login({ email, password }));
 
         return data;
       } else {
