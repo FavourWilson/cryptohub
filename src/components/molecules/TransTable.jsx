@@ -11,8 +11,8 @@ const TransTable = ({ data=[] }) => {
     ele.classList.toggle("hidden");
   };
 
-  const Approve = async (uuid) => {
-    const res = await dispatch(App({ uuid, type: "approve" }));
+  const Approve = async (id) => {
+    const res = await dispatch(App({ id, type: "approve" }));
     if (res.meta.requestStatus.toLowerCase() === "rejected") {
       // if (res.payload.statusText.toLowerCase() === "bad request") {
       // for (const prop in res?.payload?.detail) {
