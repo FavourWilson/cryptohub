@@ -33,7 +33,7 @@ const initial = {
 const Register = () => {
   const { ref } = useParams();
   const dispatch = useDispatch();
-  const { registered, transaction, loading, isAuthenticated } = useSelector(
+  const { registered, transaction, loading } = useSelector(
     (state) => state.user
   );
   const refCode = ref !== undefined ? ref : null;
@@ -328,7 +328,7 @@ const Register = () => {
     }
   };
   
-  if (registered && transaction.uuid !== undefined)
+  //if (registered && transaction.uuid !== undefined)
     // return <Navigate to={`/dashboard/transaction/${transaction.uuid}`} />;
   return <Navigate to={`/dashboard`} />;
 
