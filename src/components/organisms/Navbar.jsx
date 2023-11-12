@@ -12,7 +12,7 @@ import Text from "../atom/Text";
 import { useState, useEffect } from "react";
 import { Icons } from "../../assets/images";
 import { useSelector, useDispatch } from "react-redux";
-import { Logout as logout } from "../../features/users";
+import { logout } from "../../features/users";
 
 const Navbar = (props) => {
   const dispatch = useDispatch()
