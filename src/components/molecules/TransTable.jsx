@@ -78,7 +78,7 @@ const TransTable = ({ data=[] }) => {
                   scope="row"
                   className="px-10 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {x.uuid}
+                  {x.id}
                 </th>
                 <td className="px-10 py-4 text-gray-700">{x.plan}</td>
                 <td className="px-10 py-4 text-gray-700">${x.amount}</td>
