@@ -69,7 +69,7 @@ const TransTable = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((x, i) => (
+            {object.entries(data).map((x, i) => (
               <tr
                 key={`pp${i}`}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
