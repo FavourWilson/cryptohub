@@ -13,10 +13,10 @@ import { useState, useEffect } from "react";
 import { Icons } from "../../assets/images";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/users";
-
+import { useNavigate } from "react-router-dom";
 const Navbar = (props) => {
   const dispatch = useDispatch()
-
+   const navigate = useNavigate();
   const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = useState(false);
 
@@ -24,6 +24,7 @@ const Navbar = (props) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const Logout = async () => {
     const res = await dispatch(logout())
+    navigate("/auth");
     if (res.meta.requestStatus.toLowerCase() === "fulfilled") { 
       location.reload();
     }
