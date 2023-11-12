@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Approve as App } from "../../features/users";
 
-const TransTable = ({ data= data[] }) => {
+const TransTable = ({ data=[] }) => {
   const dispatch = useDispatch();
   const [popup, setPopup] = useState(!!0);
   const [err, setErr] = useState("");
