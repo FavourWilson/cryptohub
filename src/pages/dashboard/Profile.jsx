@@ -35,7 +35,7 @@ const Profile = () => {
       <div className="flex w-full flex-col gap-5">
         <div className="w-ful mt-3 flex h-fit flex-col gap-5 lg:grid lg:grid-cols-12">
           <div className="col-span-4 lg:!mb-0">
-            <Banner data={user} link={{ url: siteUrl, code: user.refCode.toLowerCase() }} />
+            <Banner data={user} link={{ url: siteUrl, code: user.refCode }} />
           </div>
 
           <div className="col-span-8 lg:!mb-0">
