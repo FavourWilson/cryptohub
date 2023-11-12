@@ -105,7 +105,7 @@ const TransTable = ({ data=[] }) => {
                     //   No Proof
                     // </button>
                     <button
-                      onClick={() => Popup(`p${x.uuid}`)}
+                      onClick={() => Popup(`p${x.id}`)}
                       data-modal-target="popup-modal"
                       data-modal-show="popup-modal"
                       className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -115,7 +115,7 @@ const TransTable = ({ data=[] }) => {
                     </button>
                   ) : (
                     <button
-                      onClick={() => Popup(`p${x.uuid}`)}
+                      onClick={() => Popup(`p${x.id}`)}
                       data-modal-target="popup-modal"
                       data-modal-toggle="popup-modal"
                       className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -169,7 +169,7 @@ const TransTable = ({ data=[] }) => {
                 <td className="px-10 py-4 text-right">
                   {x.status !== "funded" ? (
                     <span
-                      onClick={() => Popup(`p${x.uuid}`)}
+                      onClick={() => Popup(`p${x.id}`)}
                       className="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       Edit
@@ -187,7 +187,7 @@ const TransTable = ({ data=[] }) => {
        {data.map((x, i) => (
         <div
           key={`po${i}`}
-          id={`p${x.uuid}`}
+          id={`p${x.id}`}
           data-modal-show="popup-modal"
           tabindex="-1"
           className={`${
@@ -256,7 +256,7 @@ const TransTable = ({ data=[] }) => {
                   x.status !== "funded" ? (
                     <>
                       <button
-                        onClick={() => Popup(`p${x.uuid}`)}
+                        onClick={() => Popup(`p${x.id}`)}
                         data-modal-hide="popup-modal"
                         type="button"
                         className="text-red-500 bg-white hover:bg-red-100 focus:ring-4 focus:outline-none focus:ring-red-200 rounded-lg border border-red-200 text-sm font-medium px-5 py-2.5 hover:text-red-900 focus:z-10 dark:bg-red-700 mr-2 dark:text-red-300 dark:border-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-600"
@@ -264,7 +264,7 @@ const TransTable = ({ data=[] }) => {
                         No, cancel
                       </button>
                       <button
-                        onClick={() => Approve(x.uuid)}
+                        onClick={() => Approve(x.id)}
                         data-modal-hide="popup-modal"
                         type="button"
                         className="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
@@ -274,7 +274,7 @@ const TransTable = ({ data=[] }) => {
                     </>
                   ) : (
                     <button
-                      onClick={() => Popup(`p${x.uuid}`)}
+                      onClick={() => Popup(`p${x.id}`)}
                       data-modal-hide="popup-modal"
                       type="button"
                       className="text-blue-500 bg-white hover:bg-blue-100 focus:ring-4 focus:outline-none focus:ring-blue-200 rounded-lg border border-blue-200 text-sm font-medium px-5 py-2.5 hover:text-blue-900 focus:z-10 dark:bg-blue-700 mr-2 dark:text-blue-300 dark:border-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-600"
