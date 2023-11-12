@@ -22,8 +22,8 @@ const Navbar = (props) => {
   const { user } = useSelector((state) => state.user);
   const [isAdmin, setIsAdmin] = useState(false);
   const Logout = async () => {
-    const res = await dispatch(logout())
-    if (res.meta.requestStatus.toLowerCase() === "fulfilled") { 
+    const res = await localStorage.clear();
+    if (res) { 
       location.reload();
     }
   }
