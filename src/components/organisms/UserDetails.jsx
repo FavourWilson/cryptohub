@@ -31,7 +31,7 @@ const UserDetails = ({ data }) => {
         <dl class="max-w-md text-gray-900 divide-y divide-gray-200 col-span-1">
           <div class="flex flex-col pt-3">
             <dt class="mb-1 text-gray-500 md:text-lg">Phone number</dt>
-                      <dd class="text-lg font-semibold">{data.phone}</dd>
+                      <dd class="text-lg font-semibold">{data.phone_number}</dd>
           </div>
           <div class="flex flex-col pb-3">
             <dt class="mb-1 text-gray-500 md:text-lg">Country</dt>
