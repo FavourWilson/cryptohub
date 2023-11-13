@@ -330,7 +330,7 @@ export const getTransactions = createAsyncThunk(
     try {
       Axios.defaults.headers.common["Content-Type"] = "application/json";
       Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
-      const { data, status } = await Axios.get("/user-transaction?id=${id}");
+      const { data, status } = await Axios.get(`/user-transaction?id=${id}`);
       if (status === 200) {
         return data;
       } else {
@@ -770,7 +770,7 @@ export const GetWallet = createAsyncThunk(
 );
 
 const initialState = {
-  isAuthenticated: !1,
+  isAuthenticated: false,
   user: {
     email: "",
     username: "",
@@ -785,7 +785,7 @@ const initialState = {
       balance: 0,
     },
   },
-  loading: !1,
+  loading: false,
   registered: !1,
   notification: [],
   transaction: {},
@@ -830,6 +830,9 @@ const userSlice = createSlice({
       console.log(state.user.balance.balance);
       state.user.balance.total = state.user.balance.balance - newAmount;
     },
+    setIsAuthenticated: (state, action) => ({
+      ...state, isAuthenticated: action.payload
+    })
   },
 
   extraReducers: (builder) => {
@@ -1003,6 +1006,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { resetRegistered, resetTransaction, withdraw } =
+export const { resetRegistered, resetTransaction, withdraw, setIsAuthenticated } =
   userSlice.actions;
 export default userSlice.reducer;

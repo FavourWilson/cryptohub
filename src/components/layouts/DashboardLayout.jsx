@@ -1,20 +1,19 @@
 import Navbar from "../organisms/Navbar";
 import Sidebar from "../organisms/Sidebar";
-import { Outlet, useLocation, Navigate } from "react-router-dom";
+import { Outlet, useLocation, Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import DashboardFooter from "../templates/DashboardFooter";
-import { getNotification } from "../../features/users";
+import { getNotification, setIsAuthenticated } from "../../features/users";
 import { useSelector, useDispatch } from "react-redux";
 
 const DashboardLayout = () => {
   const dispatch = useDispatch();
-  const {isLoading, isSuccess } =  useLoginMutation();
-  
+  const navigate = useNavigate()
   const routes = [];
   const location = useLocation();
   const [open, setOpen] = useState(true);
   const [currentRoute, setCurrentRoute] = useState("Dashboard");
-
+  const { isAuthenticated, loading, user } = useSelector((state) => state.user);
   useEffect(() => {
     window.innerWidth < 1200 ? setOpen(!1) : setOpen(!0);
     window.addEventListener("resize", () =>
@@ -52,8 +51,16 @@ const DashboardLayout = () => {
     }
     return activeNavbar;
   };
+  useEffect(() => {
+    if (!localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")) {
+      dispatch(setIsAuthenticated(false))
+      console.log(isAuthenticated)
+      navigate("/auth")
+    }
+    dispatch(setIsAuthenticated(true))
+  },[])
   // if (!isSuccess && !isLoading) return <Navigate to="/auth" />;
-  if (!isAuthenticated && !loading) return <Navigate to="/auth" />;
+ // if (!isAuthenticated && !loading) return <Navigate to="/auth" />;
   return (
     <>
       <div className="flex h-full w-full">
