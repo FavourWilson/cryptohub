@@ -24,7 +24,7 @@ const Navbar = (props) => {
   const Logout = async () => {
     const res = await localStorage.clear();
     if (res) { 
-      location.reload();
+      navigate("/auth")
     }
   }
 
