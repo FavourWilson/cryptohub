@@ -12,7 +12,7 @@ import Text from "../atom/Text";
 import { useState, useEffect } from "react";
 import { Icons } from "../../assets/images";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../features/users";
+import { Logout as logout } from "../../features/users";
 const Navbar = (props) => {
   const dispatch = useDispatch()
    const navigate = useNavigate();
@@ -22,9 +22,9 @@ const Navbar = (props) => {
   const { user } = useSelector((state) => state.user);
   const [isAdmin, setIsAdmin] = useState(false);
   const Logout = async () => {
-    const res = await localStorage.clear();
-    if (res) { 
-      navigate("/auth")
+    const res = await dispatch(logout())
+    if (res.meta.requestStatus.toLowerCase() === "fulfilled") { 
+      location.reload();
     }
   }
 
