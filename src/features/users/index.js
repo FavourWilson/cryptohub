@@ -194,14 +194,19 @@ export const getUser = createAsyncThunk("app/me", async (_, thunkAPI) => {
 });
 
 export const logout = createAsyncThunk("users/logout", async (_, thunkAPI) => {
- try {
-        localStorage.removeItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a");
-    localStorage.removeItem("cfb90493-c364-4ade-820d-b6848bc65f44");;
-    return thunkAPI.fulfillWithValue({ success: !0 });
+  try {
+    localStorage.removeItem("access_token");
+    // localStorage.removeItem("refresh");
+
+    const data = { message: "You have successfully Logged out", status: 200 };
+
+    return data;
   } catch (err) {
-    return thunkAPI.rejectWithValue({ success: !0 });
+    const data = { message: "Error occurred logging you out", status: 500 };
+    return thunkAPI.rejectWithValue(data);
   }
 });
+
 
 export const getNotification = createAsyncThunk(
   "users/notification",
@@ -462,8 +467,7 @@ export const sendToBal = createAsyncThunk(
 
 export const Logout = createAsyncThunk("user/Logout", async (_, thunkAPI) => {
   try {
-        localStorage.removeItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a");
-    localStorage.removeItem("cfb90493-c364-4ade-820d-b6848bc65f44");;
+    localStorage.removeItem("cfb90493-c364-4ade-820d-b6848bc65f44");
     return thunkAPI.fulfillWithValue({ success: !0 });
   } catch (err) {
     return thunkAPI.rejectWithValue({ success: !0 });
