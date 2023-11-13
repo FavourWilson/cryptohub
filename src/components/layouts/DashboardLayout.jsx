@@ -4,12 +4,11 @@ import { Outlet, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import DashboardFooter from "../templates/DashboardFooter";
 import { getNotification } from "../../features/users";
-import { useLoginMutation } from "../../apis/authApi.apis";
 import { useSelector, useDispatch } from "react-redux";
 
 const DashboardLayout = () => {
   const dispatch = useDispatch();
-  const {isSuccess, isLoading } =  useLoginMutation();
+  const { isAuthenticated, loading, user } = useSelector((state) => state.user);
 
   
   const routes = [];
@@ -55,7 +54,7 @@ const DashboardLayout = () => {
     return activeNavbar;
   };
   // if (!isSuccess && !isLoading) return <Navigate to="/auth" />;
-
+  if (!isAuthenticated && !loading) return <Navigate to="/auth" />;
   return (
     <>
       <div className="flex h-full w-full">
