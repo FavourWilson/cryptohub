@@ -15,7 +15,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Logout as logout } from "../../features/users";
 const Navbar = (props) => {
   const dispatch = useDispatch()
-   const navigate = useNavigate();
   const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = useState(false);
 
