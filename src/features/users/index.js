@@ -327,11 +327,11 @@ export const postTransaction = createAsyncThunk(
 
 export const getTransactions = createAsyncThunk(
   "admin/getTransactions",
-  async (_, thunkAPI) => {
+  async ({id}, thunkAPI) => {
     try {
       Axios.defaults.headers.common["Content-Type"] = "application/json";
       Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
-      const { data, status } = await Axios.get("transactions");
+      const { data, status } = await Axios.get("/user-transaction?id=${id}");
       if (status === 200) {
         return data;
       } else {
