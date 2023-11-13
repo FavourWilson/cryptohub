@@ -151,7 +151,7 @@ export const Register = createAsyncThunk(
       if (status === 201) {
         const { dispatch } = thunkAPI;
 
-        await dispatch(login({ email, password }));
+        //await dispatch(login({ email, password }));
 
         return data;
       } else {
@@ -195,8 +195,8 @@ export const getUser = createAsyncThunk("app/me", async (_, thunkAPI) => {
 
 export const logout = createAsyncThunk("users/logout", async (_, thunkAPI) => {
   try {
-    localStorage.removeItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a");
-    localStorage.removeItem("cfb90493-c364-4ade-820d-b6848bc65f44");
+    localStorage.removeItem("access_token");
+    // localStorage.removeItem("refresh");
 
     const data = { message: "You have successfully Logged out", status: 200 };
 
@@ -206,6 +206,7 @@ export const logout = createAsyncThunk("users/logout", async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(data);
   }
 });
+
 
 export const getNotification = createAsyncThunk(
   "users/notification",
@@ -325,11 +326,11 @@ export const postTransaction = createAsyncThunk(
 
 export const getTransactions = createAsyncThunk(
   "admin/getTransactions",
-  async (_, thunkAPI) => {
+  async ({id}, thunkAPI) => {
     try {
       Axios.defaults.headers.common["Content-Type"] = "application/json";
       Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
-      const { data, status } = await Axios.get("transactions");
+      const { data, status } = await Axios.get("/user-transaction?id=${id}");
       if (status === 200) {
         return data;
       } else {
@@ -466,7 +467,8 @@ export const sendToBal = createAsyncThunk(
 
 export const Logout = createAsyncThunk("user/Logout", async (_, thunkAPI) => {
   try {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem("cfb90493-c364-4ade-820d-b6848bc65f44");
+    localStorage.removeItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a");
     return thunkAPI.fulfillWithValue({ success: !0 });
   } catch (err) {
     return thunkAPI.rejectWithValue({ success: !0 });

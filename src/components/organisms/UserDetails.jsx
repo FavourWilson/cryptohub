@@ -1,9 +1,9 @@
 import { useState } from "react";
-import QuickAction from "../molecules/QuickAction";
+// import QuickAction from "../molecules/QuickAction";
 
 const UserDetails = ({ data }) => {
     const [show, setShow] = useState(!!0)
-
+  console.log("This is ",data)
     const SetShow = () => {
         setShow(!show)
     }
@@ -14,13 +14,13 @@ const UserDetails = ({ data }) => {
           <div class="flex flex-col pb-3">
             <dt class="mb-1 text-gray-500 md:text-lg">Full name</dt>
             <dd class="text-lg font-semibold">
-              {data.first_name} {data.last_name}
+              {data.username.first_name} {data.username.last_name}
             </dd>
           </div>
           <div class="flex flex-col py-3">
             <dt class="mb-1 text-gray-500 md:text-lg">Email</dt>
             <dd class="text-lg font-semibold">
-              {data.email}
+              {data.username.email}
             </dd>
           </div>
           <div class="flex flex-col pt-3">
@@ -31,7 +31,7 @@ const UserDetails = ({ data }) => {
         <dl class="max-w-md text-gray-900 divide-y divide-gray-200 col-span-1">
           <div class="flex flex-col pt-3">
             <dt class="mb-1 text-gray-500 md:text-lg">Phone number</dt>
-                      <dd class="text-lg font-semibold">{data.phone}</dd>
+                      <dd class="text-lg font-semibold">{data.phone_number}</dd>
           </div>
           <div class="flex flex-col pb-3">
             <dt class="mb-1 text-gray-500 md:text-lg">Country</dt>
@@ -45,7 +45,7 @@ const UserDetails = ({ data }) => {
           </div>
         </dl>
           </div>
-          <QuickAction />
+{/*           <QuickAction /> */}
     </>
   );
 };

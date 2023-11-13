@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Approve as App } from "../../features/users";
 
-const TransTable = ({ data=[] }) => {
+const TransTable = ({ data }) => {
   const dispatch = useDispatch();
   const [popup, setPopup] = useState(!!0);
   const [err, setErr] = useState("");
@@ -25,8 +25,6 @@ const TransTable = ({ data=[] }) => {
       location.reload();
     }
   };
-
-  console.log("Transtable",data)
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-3">
@@ -184,7 +182,7 @@ const TransTable = ({ data=[] }) => {
         </table>
       </div>
 
-       {data.map((x, i) => (
+      {data.map((x, i) => (
         <div
           key={`po${i}`}
           id={`p${x.uuid}`}
@@ -285,8 +283,6 @@ const TransTable = ({ data=[] }) => {
                 ) : (
                   ""
                 )}
-
-     
               </div>
             </div>
           </div>

@@ -38,6 +38,8 @@ const Login = () => {
     }
   };
 
+ 
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -59,14 +61,18 @@ const Login = () => {
     await signIn(formData);
   };
 
-  useEffect(() => {
+
+    useEffect(() => {
     if (isLoading) {
       console.log("Loading...");
     }
 
     if (isSuccess) {
+      if(data.is_admin){
+        localStorage.setItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a",data.access_token, true);
+      }
       Toast("success", "Login Successful");
-      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("cfb90493-c364-4ade-820d-b6848bc65f44", data.access_token);
       navigate("/dashboard");
     }
 
@@ -74,6 +80,7 @@ const Login = () => {
       Toast("error", error);
     }
   }, [isLoading, isSuccess, error, data]);
+ 
 
   // if (isAuthenticated) return ;
   return (

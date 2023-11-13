@@ -18,7 +18,7 @@ const Dashboard = () => {
     dispatch(resetTransaction());
     dispatch(getTransactions());
 
-    if (localStorage.getItem("access_token")) {
+    if (localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")) {
       setIsAdmin(true);
     }
   }, [ch]);
@@ -75,7 +75,7 @@ const Dashboard = () => {
         <div className="space-y-5">
           {!!!isAdmin && (
             <div className="mt-5 grid grid-cols-1 gap-5 h-lg">
-              <TotalSpent />
+{/*               <TotalSpent /> */}
             </div>
           )}
           {!!!isAdmin && (
