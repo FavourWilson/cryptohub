@@ -1,4 +1,4 @@
-import TotalSpent from "../../components/organisms/TotalSpent";
+// import TotalSpent from "../../components/organisms/TotalSpent";
 import TradeChart from "../../components/organisms/TradeChart";
 import Tables from "../../components/atom/Tables";
 import { userTransaction } from "../../const/table";

@@ -4,14 +4,14 @@ import { v4 as uuidv4 } from "uuid";
 import { getFaq } from "../landing";
 
 const token = () =>
-  localStorage.getItem("access_token");
+  localStorage.getItem("cfb90493-c364-4ade-820d-b6848bc65f44");
 
-// const headers = {
-//   headers: {
-//     "Content-Type": "application/json",
-//     Authorization: `Bearer ${token()}`,
-//   },
-// };
+const headers = {
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token()}`,
+  },
+};
 
 // export const login = createAsyncThunk(
 //   "users/login",
@@ -195,8 +195,8 @@ export const getUser = createAsyncThunk("app/me", async (_, thunkAPI) => {
 
 export const logout = createAsyncThunk("users/logout", async (_, thunkAPI) => {
   try {
+    localStorage.removeItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a");
     localStorage.removeItem("cfb90493-c364-4ade-820d-b6848bc65f44");
-    // localStorage.removeItem("refresh");
 
     const data = { message: "You have successfully Logged out", status: 200 };
 
@@ -253,24 +253,24 @@ export const createNotification = createAsyncThunk(
   }
 );
 
-export const getStatus = createAsyncThunk(
-  "users/status",
-  async (_, thunkAPI) => {
-    try {
-      Axios.defaults.headers.common["Content-Type"] = "application/json";
-      Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
-      // const { data, status } = await Axios.get("account-status");
-      // if (status === 200) {
-      //   return data;
-      // } else {
-      //   return thunkAPI.rejectWithValue(data);
-      // }
-    } catch (err) {
-      // return thunkAPI.rejectWithValue(err.response.data);
-      return "";
-    }
-  }
-);
+// export const getStatus = createAsyncThunk(
+//   "users/status",
+//   async (_, thunkAPI) => {
+//     try {
+//       Axios.defaults.headers.common["Content-Type"] = "application/json";
+//       Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
+//       const { data, status } = await Axios.post("account-status");
+//       if (status === 200) {
+//         return data;
+//       } else {
+//         return thunkAPI.rejectWithValue(data);
+//       }
+//     } catch (err) {
+//        return thunkAPI.rejectWithValue(err.response.data);
+//       return "";
+//     }
+//   }
+// );
 
 export const getUsers = createAsyncThunk(
   "admin/getusers",
@@ -278,7 +278,7 @@ export const getUsers = createAsyncThunk(
     try {
       Axios.defaults.headers.common["Content-Type"] = "application/json";
       Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
-      const { data, status } = await Axios.get("admin/allusers");
+      const { data, status } = await Axios.get("admin/users-transactions");
       if (status === 200) {
         return data;
       } else {
@@ -466,7 +466,7 @@ export const sendToBal = createAsyncThunk(
 
 export const Logout = createAsyncThunk("user/Logout", async (_, thunkAPI) => {
   try {
-    localStorage.removeItem("cfb90493-c364-4ade-820d-b6848bc65f44");
+    localStorage.removeItem("access_token");
     return thunkAPI.fulfillWithValue({ success: !0 });
   } catch (err) {
     return thunkAPI.rejectWithValue({ success: !0 });
@@ -583,7 +583,7 @@ export const SetBalance = createAsyncThunk(
 
 export const blockUser = createAsyncThunk(
   "admin/blockUser",
-  async ({ uuid }, thunkAPI) => {
+  async ({ uuid}, thunkAPI) => {
     const body = { uuid };
     console.log("body", body);
     try {
@@ -790,15 +790,15 @@ const initialState = {
   allTransaction: [],
   history: [],
   refHistory: [],
-  status: [
-    {
-      invested: [0, 0, 0, 0, 0, 0],
-      invested_sum: 0,
-      deposit: [0, 0, 0, 0, 0, 0],
-      deposit_sum: 0,
-      months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-    },
-  ],
+  // status: [
+  //   {
+  //     invested: [0, 0, 0, 0, 0, 0],
+  //     invested_sum: 0,
+  //     deposit: [0, 0, 0, 0, 0, 0],
+  //     deposit_sum: 0,
+  //     months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  //   },
+  // ],
   admin: {
     wallet: { address: "" },
     allUsers: [],
@@ -937,16 +937,16 @@ const userSlice = createSlice({
       .addCase(getUsers.rejected, (state) => {
         state.loading = !1;
       })
-      .addCase(getStatus.pending, (state) => {
-        state.loading = !0;
-      })
-      .addCase(getStatus.fulfilled, (state, action) => {
-        state.loading = !1;
-        state.status = action.payload;
-      })
-      .addCase(getStatus.rejected, (state) => {
-        state.loading = !1;
-      })
+      // .addCase(getStatus.pending, (state) => {
+      //   state.loading = !0;
+      // })
+      // .addCase(getStatus.fulfilled, (state, action) => {
+      //   state.loading = !1;
+      //   state.status = action.payload;
+      // })
+      // .addCase(getStatus.rejected, (state) => {
+      //   state.loading = !1;
+      // })
       .addCase(createNotification.pending, (state) => {
         state.loading = !0;
       })
