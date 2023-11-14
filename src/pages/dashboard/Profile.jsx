@@ -29,7 +29,7 @@ const Profile = () => {
     e.preventDefault();
   };
 
-  const siteUrl = "https://crypto-tradinghub.org";
+  const siteUrl = "https://crypto-tradinghubs.com";
   return (
     <>
       <div className="flex w-full flex-col gap-5">
