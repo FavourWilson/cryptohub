@@ -7,6 +7,7 @@ const QuickAction = () => {
   const Open = () => {
     setOpen(!open);
   };
+
   return (
     <>
       <div data-dial-init class="fixed right-6 bottom-6 group z-40">

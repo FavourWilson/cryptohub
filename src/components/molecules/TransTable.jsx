@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Approve as App } from "../../features/users";
+import { useGetUserTransactionsQuery } from "../../apis/userApi.apis";
 
-const TransTable = ({ data }) => {
+const TransTable = ({ userId }) => {
   const dispatch = useDispatch();
+  const { isError, data } = useGetUserTransactionsQuery({ user_id: userId });
+
+  console.log(data);
   const [popup, setPopup] = useState(!!0);
   const [err, setErr] = useState("");
   const Popup = (x) => {
@@ -20,7 +24,7 @@ const TransTable = ({ data }) => {
       //   Toast("error", `${res?.payload?.detail[prop]}`);
       // }
       // }
-        setErr('Error; Approving this transaction. Try again')
+      setErr("Error; Approving this transaction. Try again");
     } else {
       location.reload();
     }
@@ -67,7 +71,7 @@ const TransTable = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((x, i) => (
+            {data?.map((x, i) => (
               <tr
                 key={`pp${i}`}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
@@ -76,18 +80,18 @@ const TransTable = ({ data }) => {
                   scope="row"
                   className="px-10 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {x.uuid}
+                  {x?.id}
                 </th>
-                <td className="px-10 py-4 text-gray-700">{x.plan}</td>
-                <td className="px-10 py-4 text-gray-700">${x.amount}</td>
-                <td className="px-10 py-4 text-gray-700">{x.payment}</td>
-                <td className="px-5 py-4 text-gray-700">{x.roi}</td>
+                <td className="px-10 py-4 text-gray-700">{x?.plan}</td>
+                <td className="px-10 py-4 text-gray-700">${x?.amount}</td>
+                <td className="px-10 py-4 text-gray-700">{x?.payment}</td>
+                <td className="px-5 py-4 text-gray-700">{x?.roi}</td>
                 <td className="px-10 py-4 text-gray-700">
-                  {x.status === "initial" ? (
+                  {x?.status === "initial" ? (
                     <span className="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
                       initial
                     </span>
-                  ) : x.status === "unfunded" ? (
+                  ) : x?.status === "unfunded" ? (
                     <span className="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
                       Unfunded
                     </span>
@@ -98,12 +102,12 @@ const TransTable = ({ data }) => {
                   )}
                 </td>
                 <td className="px-2 py-4 text-gray-700">
-                  {x.proof === null ? (
+                  {x?.proof === null ? (
                     // <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                     //   No Proof
                     // </button>
                     <button
-                      onClick={() => Popup(`p${x.uuid}`)}
+                      onClick={() => Popup(`p${x?.uuid}`)}
                       data-modal-target="popup-modal"
                       data-modal-show="popup-modal"
                       className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -113,7 +117,7 @@ const TransTable = ({ data }) => {
                     </button>
                   ) : (
                     <button
-                      onClick={() => Popup(`p${x.uuid}`)}
+                      onClick={() => Popup(`p${x?.uuid}`)}
                       data-modal-target="popup-modal"
                       data-modal-toggle="popup-modal"
                       className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -124,50 +128,50 @@ const TransTable = ({ data }) => {
                   )}
                 </td>
                 <td className="px-2 text-center py-4 text-gray-700">
-                  {x.start === null ? (
+                  {x?.start === null ? (
                     <span className="bg-blue-100 text-blue-800 text-xs font-medium px-1 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
                       Not Started
                     </span>
-                  ) : x.start === "ended" ? (
+                  ) : x?.start === "ended" ? (
                     <span className="bg-red-100 text-red-800 text-sm font-medium px-1 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
                       Ended
                     </span>
                   ) : (
                     <span className="bg-green-100 text-green-800 text-xs font-medium px-1 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
-                      {x.start}
+                      {x?.start}
                     </span>
                   )}
                 </td>
                 <td className="px-2 text-center py-4 text-gray-700">
-                  {x.start === null ? (
+                  {x?.start === null ? (
                     <span className="bg-blue-100 text-blue-800 text-xs font-medium px-1 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
                       Not Started
                     </span>
-                  ) : x.start === "ended" ? (
+                  ) : x?.start === "ended" ? (
                     <span className="bg-red-100 text-red-800 text-sm font-medium px-1 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
                       Ended
                     </span>
                   ) : (
                     <span className="bg-green-100 text-green-800 text-xs font-medium px-1 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
-                      {x.end}
+                      {x?.end}
                     </span>
                   )}
                 </td>
                 <td className="px-2 text-center py-4 text-gray-700">
-                  {x.investment_status === "start" ? (
+                  {x?.investment_status === "start" ? (
                     <span className="bg-red-100 text-red-800 text-sm font-medium px-1 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
                       Not Started
                     </span>
                   ) : (
                     <span className="bg-green-100 text-green-800 text-sm font-medium px-1 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
-                      {x.investment_status}
+                      {x?.investment_status}
                     </span>
                   )}
                 </td>
                 <td className="px-10 py-4 text-right">
-                  {x.status !== "funded" ? (
+                  {x?.status !== "funded" ? (
                     <span
-                      onClick={() => Popup(`p${x.uuid}`)}
+                      onClick={() => Popup(`p${x?.uuid}`)}
                       className="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       Edit
@@ -182,10 +186,10 @@ const TransTable = ({ data }) => {
         </table>
       </div>
 
-      {data.map((x, i) => (
+      {data?.map((x, i) => (
         <div
           key={`po${i}`}
-          id={`p${x.uuid}`}
+          id={`p${x?.id}`}
           data-modal-show="popup-modal"
           tabindex="-1"
           className={`${
@@ -195,7 +199,7 @@ const TransTable = ({ data }) => {
           <div className="relative w-full max-w-md max-h-full">
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
               <button
-                onClick={() => Popup(`p${x.uuid}`)}
+                onClick={() => Popup(`p${x?.id}`)}
                 type="button"
                 className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
                 data-modal-hide="popup-modal"
@@ -233,10 +237,10 @@ const TransTable = ({ data }) => {
                 </svg>
                 <div className="my-2 flex flex-row gap-3 justify-center">
                   {err}
-                  {x.proof !== null ? (
+                  {x?.proof !== null ? (
                     <img
                       className="h-48 max-w-full rounded-lg"
-                      src={x.proof}
+                      src={x?.proof}
                       alt=""
                     />
                   ) : (
@@ -244,17 +248,17 @@ const TransTable = ({ data }) => {
                   )}
                 </div>
                 <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                  {x.proof !== null
-                    ? x.status !== "funded"
+                  {x?.proof !== null
+                    ? x?.status !== "funded"
                       ? "Are you sure you want to approve this transaction?"
                       : "Transaction already Approved!"
                     : ""}
                 </h3>
-                {x.proof !== null ? (
-                  x.status !== "funded" ? (
+                {x?.proof !== null ? (
+                  x?.status !== "funded" ? (
                     <>
                       <button
-                        onClick={() => Popup(`p${x.uuid}`)}
+                        onClick={() => Popup(`p${x?.uuid}`)}
                         data-modal-hide="popup-modal"
                         type="button"
                         className="text-red-500 bg-white hover:bg-red-100 focus:ring-4 focus:outline-none focus:ring-red-200 rounded-lg border border-red-200 text-sm font-medium px-5 py-2.5 hover:text-red-900 focus:z-10 dark:bg-red-700 mr-2 dark:text-red-300 dark:border-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-600"
@@ -262,7 +266,7 @@ const TransTable = ({ data }) => {
                         No, cancel
                       </button>
                       <button
-                        onClick={() => Approve(x.uuid)}
+                        onClick={() => Approve(x?.id)}
                         data-modal-hide="popup-modal"
                         type="button"
                         className="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
@@ -272,7 +276,7 @@ const TransTable = ({ data }) => {
                     </>
                   ) : (
                     <button
-                      onClick={() => Popup(`p${x.uuid}`)}
+                      onClick={() => Popup(`p${x?.id}`)}
                       data-modal-hide="popup-modal"
                       type="button"
                       className="text-blue-500 bg-white hover:bg-blue-100 focus:ring-4 focus:outline-none focus:ring-blue-200 rounded-lg border border-blue-200 text-sm font-medium px-5 py-2.5 hover:text-blue-900 focus:z-10 dark:bg-blue-700 mr-2 dark:text-blue-300 dark:border-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-600"

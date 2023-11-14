@@ -2,27 +2,35 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { blockUser } from "../../features/users";
+import { useDeleteUserMutation } from "../../apis/userApi.apis";
+import { contains } from "jquery";
 
 const UsersCard = ({ index, data }) => {
   const dispatch = useDispatch();
-  
+
+  const [deleteUser, {}] = useDeleteUserMutation();
+
   const [open, setOpen] = useState(!!0);
   const onClick = () => {
     setOpen(!open);
   };
-  
+
   const BlockUser = async (e) => {
-    e.preventDefault();
-    
+    console.log("i");
+
+    const res = await deleteUser(data?.username?.id);
     setOpen(!open);
-    const res = await dispatch(blockUser({ uuid: data.username.id }));
-    if (res.meta.requestStatus.toLowerCase() === "rejected") {
-      // setErr(["Couldn't process."]);
-    } else {
-      window.location.reload();
-    }
+
+    console.log(res);
+
+    // const res = await dispatch(blockUser({ uuid: data.username.id }));
+    // if (res.meta.requestStatus.toLowerCase() === "rejected") {
+    //   // setErr(["Couldn't process."]);
+    // } else {
+    //   window.location.reload();
+    // }
   };
-  
+
   return (
     <>
       <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -63,7 +71,7 @@ const UsersCard = ({ index, data }) => {
             </li> */}
             <li>
               <span
-                onClick={BlockUser}
+                onClick={() => BlockUser()}
                 className="cursor-pointer block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
               >
                 Delete

@@ -2,22 +2,25 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { SetBalance, getUsers } from "../../features/users";
+import { useEditUserBalanceMutation } from "../../apis/userApi.apis";
 
 const Drawer = ({ setOpen, open }) => {
   const { admin, loading } = useSelector((state) => state.user);
   const { user } = useParams();
   const dispatch = useDispatch();
   const [data] = useState(admin.allUsers[user]);
-  const [bal] = useState(data.balance);
-  const [pass, setPass] = useState('');
+  const [bal] = useState(data?.balance);
+  const [pass, setPass] = useState("");
 
   const init = {
-    balance: bal.balance,
-    ref_bonus: bal.ref_bonus,
-    bonus: bal.bonus,
-    profit: bal.profit,
-    cw: bal.cw,
+    user_id: data?.username?.id,
+    balance: bal?.balance,
+    ref_bonus: bal?.ref_bonus,
+    bonus: bal?.bonus,
+    profit: bal?.profit,
+    cw: bal?.cw,
   };
+
   const [formData, setFormData] = useState(init);
   const { balance, ref_bonus, bonus, profit, cw } = formData;
 
@@ -52,7 +55,8 @@ const Drawer = ({ setOpen, open }) => {
     setEPro(!!1);
     setEBon(!!1);
     setERbon(!!1);
-    b&&setFormData({
+    b &&
+      setFormData({
         balance,
         ref_bonus,
         bonus,
@@ -60,6 +64,9 @@ const Drawer = ({ setOpen, open }) => {
         cw,
       });
   };
+
+  const [editUserBalance, {}] = useEditUserBalanceMutation();
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -83,27 +90,30 @@ const Drawer = ({ setOpen, open }) => {
       setErr([]);
 
       const raw = {
-        uuid: data.uuid,
-        bal: balance,
-        pro: profit,
-        bon: bonus,
-        rbon: ref_bonus,
-        cw,
+        user_id: data?.username.id,
+        balance: balance,
+        profit: profit,
+        bonus: bonus,
+        ref_bonus: ref_bonus,
+        // cw,
       };
-      const res = await dispatch(SetBalance(raw));
-      if (res.meta.requestStatus.toLowerCase() === "rejected") {
-        setErr(["Couldn't process."]);
-      } else {
-        await dispatch(getUsers());
-        {
-          !loading &&
-            setTimeout(() => {
-              Reset(!!1);
-            }, 3000);
-        }
-      }
+
+      editUserBalance(raw);
+      // const res = await dispatch(SetBalance(raw));
+      // if (res.meta.requestStatus.toLowerCase() === "rejected") {
+      //   setErr(["Couldn't process."]);
+      // } else {
+      //   await dispatch(getUsers());
+      //   {
+      //     !loading &&
+      //       setTimeout(() => {
+      //         Reset(!!1);
+      //       }, 3000);
+      //   }
+      // }
     }
   };
+
   return (
     <>
       {/* <!-- drawer component --> */}
@@ -132,7 +142,7 @@ const Drawer = ({ setOpen, open }) => {
               clip-rule="evenodd"
             ></path>
           </svg>
-          {data.email} Info.
+          {data?.email} Info.
         </h5>
         <button
           onClick={() => setOpen(!open)}
@@ -360,7 +370,7 @@ const Drawer = ({ setOpen, open }) => {
                   type="submit"
                   className="inline-flex items-center gap-1 hover:gap-2 justify-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 >
-                  Submit{" "}
+                  Submit
                   <svg
                     className="w-4 h-4"
                     aria-hidden="true"
@@ -385,7 +395,7 @@ const Drawer = ({ setOpen, open }) => {
           </h5>
           <div className="inline-flex items-center">
             <p>Date Joined: </p>
-            <p>{data.joined}</p>
+            <p>{data?.joined}</p>
           </div>
         </div>
       </div>
