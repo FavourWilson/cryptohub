@@ -15,7 +15,7 @@ const UsersCard = ({ index, data }) => {
     e.preventDefault();
     
     setOpen(!open);
-    const res = await dispatch(blockUser({ uuid: data.username.id }));
+    const res = await dispatch(blockUser({ id: data.username.id }));
     if (res.meta.requestStatus.toLowerCase() === "rejected") {
       // setErr(["Couldn't process."]);
     } else {
