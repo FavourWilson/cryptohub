@@ -7,7 +7,7 @@ export const baseQuery = fetchBaseQuery({
     headers.set(
       `Authorization`,
       `Bearer ${
-        localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a") || ""
+        localStorage.getItem("cfb90493-c364-4ade-820d-b6848bc65f44") || ""
       }`
     );
   },

@@ -1,27 +1,34 @@
 import Card from "../../components/atom/Card";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { postTransaction, createNotification } from "../../features/users";
+import { useDepositMutation } from "../../apis/userApi.apis";
 
 const init = {
   plan: "silver",
   amount: "",
   payment: "btc",
   roi: "1",
-};
+  };
+
 
 const Transaction = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { history, transaction, loading } = useSelector((state) => state.user);
+  const { id } = useParams();
+  const { loading, user } = useSelector((state) => state.user);
   const [formData, setFormData] = useState(init);
   const [start, setStart] = useState(500);
   const [stop, setStop] = useState(5000);
   const [step, setStep] = useState(5000);
   const [err, setErr] = useState(!!0);
 
+
+  const [deposit, { }] = useDepositMutation();
+
+  
   let { plan, amount, payment, roi } = formData;
 
   let i;
@@ -226,38 +233,28 @@ const Transaction = () => {
       toast.dismiss();
     }
 
-    if (!err) {
-      try {
+    const raw = {
+      plan : plan,
+      roi : roi,
+      amount : amount,
+      payment : payment,
+      isNew: "false",
+      status: "investment",
+      active: "initial"
+    }
+  try {
         roi = `${roi} Weeks`;
-        const res = await dispatch(
-          postTransaction({
-            plan,
-            roi,
-            amount,
-            payment,
-            isNew: !1,
-            type: "investment",
-          })
-        );
-
-        if (res.meta.requestStatus.toLowerCase() === "rejected") {
-          if (res.payload.statusText.toLowerCase() === "bad request") {
-            for (const prop in res?.payload?.detail) {
-              Toast("error", `${res?.payload?.detail[prop]}`);
-            }
-          }
-        } else {
-          const url = `/dashboard/transaction/${res.payload.uuid}`;
+         
+    const res = await deposit(raw);
+    console.log(res);
+         const url = `/dashboard/transaction/${res.data.uuid}`;
           const msg = `Investment of ${"$" + amount} initiated - [unfunded].`;
-          const re = await dispatch(
+          await dispatch(
             createNotification({ message: msg, type: "invest" })
-          );
+          ); 
           // Toast("success", `${msg}`);
           navigate(url);
-          // setInterval(() => {
-          //   typeof transaction.uuid !== "undefined" ? navigate(url) : null;
-          // }, 100)
-        }
+      
       } catch (err) {
         console.log(err);
         Toast(
@@ -265,7 +262,6 @@ const Transaction = () => {
           `Can't complete transaction now, We are working to fix this.`
         );
       }
-    }
   };
 
   return (

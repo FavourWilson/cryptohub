@@ -145,7 +145,7 @@ export const Register = createAsyncThunk(
     };
 
     try {
-      Axios.defaults.headers.common["Content-Type"] = "application/json";
+      Axios.defaults.headers.common["Content-Type"] = "application/json"; 
       Axios.defaults.headers.common["Authorization"] = "";
       const { data, status } = await Axios.post(`auth/register`, body);
       if (status === 201) {

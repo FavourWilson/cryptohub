@@ -27,6 +27,33 @@ export const userApi = createApi({
         };
       },
     }),
+    deposit: builder.mutation({
+      query: (params) => {
+        console.log(params);
+        return {
+          method: "POST",
+          url: `transactions/`,
+          body: { 
+            status: params.status ? params.status : "",
+            plan: params.plan ? params.plan : "",
+            roi: params.roi ? params.roi : "",
+            payment: params.payment ? params.payment : "",
+            active: params.active ? params.active : "",
+            isNew: params.isNew ? params.isNew : "",
+            amount: params.amount ? params.amount : "",
+          },
+        };
+      },
+    }),
+
+    getUserId: builder.query({
+      query: () => {
+        return {
+          method: "GET",
+          url: `/user`,
+        };
+      },
+    }),
 
     deleteUser: builder.mutation({
       query: (user_id) => {
@@ -47,4 +74,6 @@ export const {
   useGetUserTransactionsQuery,
   useEditUserBalanceMutation,
   useDeleteUserMutation,
+  useDepositMutation,
+  useGetUserIdQuery
 } = userApi;

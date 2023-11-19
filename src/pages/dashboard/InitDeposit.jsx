@@ -122,7 +122,7 @@ const InitDeposit = () => {
                   <p className="mt-2 text-base text-gray-800 font-bold">
                     Make the deposit of your {transaction.type} amount valued ($
                     {transaction.amount}) to (
-                    {transaction.payment.toUpperCase()}) Wallet / Account
+                    {transaction.payment}) Wallet / Account
                     generate and assigned to you for this transaction.
                   </p>
                   <p className="font-black">IMPORTANT!</p>

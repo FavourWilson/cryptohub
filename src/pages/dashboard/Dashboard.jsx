@@ -6,24 +6,27 @@ import Activities from "../../components/organisms/Activities";
 import { useDispatch, useSelector } from "react-redux";
 import AllWidgets from "../../components/organisms/AllWidgets";
 import { Link } from "react-router-dom";
-import { getTransactions, resetTransaction } from "../../features/users";
+import { getTransactions, getUser, resetTransaction } from "../../features/users";
 import { useState, useEffect } from "react";
 import Transactions from "../admin/Transactions";
+import { useGetUserIdQuery } from "../../apis/userApi.apis";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const [ch] = useState(!1);
   const [isAdmin, setIsAdmin] = useState(false);
-
+ 
+  const {data}= useGetUserIdQuery()
+  console.log(data);
   useEffect(() => {
     dispatch(resetTransaction());
     dispatch(getTransactions());
-
     if (localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")) {
       setIsAdmin(true);
     }
   }, [ch]);
 
   const { history, user, allTransaction } = useSelector((state) => state.user);
+
 
   return (
     <>
