@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useApproveTransactionMutation, useGetUserTransactionsQuery } from "../../apis/userApi.apis";
+import { Approve as App } from "../../features/users";
+import { useGetUserTransactionsQuery } from "../../apis/userApi.apis";
 
 const TransTable = ({ userId }) => {
   const dispatch = useDispatch();
   const { isError, data } = useGetUserTransactionsQuery({ user_id: userId });
-  const { approve } = useApproveTransactionMutation();
+
   console.log(data);
   const [popup, setPopup] = useState(!!0);
   const [err, setErr] = useState("");
@@ -14,8 +15,8 @@ const TransTable = ({ userId }) => {
     ele.classList.toggle("hidden");
   };
 
-  const Approve = async () => {
-    const res = await dispatch(approve(data?.id));
+  const Approve = async (uuid) => {
+    const res = await dispatch(App({ uuid, type: "approve" }));
     if (res.meta.requestStatus.toLowerCase() === "rejected") {
       // if (res.payload.statusText.toLowerCase() === "bad request") {
       // for (const prop in res?.payload?.detail) {
@@ -28,9 +29,6 @@ const TransTable = ({ userId }) => {
       location.reload();
     }
   };
-
-
-
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-3">
