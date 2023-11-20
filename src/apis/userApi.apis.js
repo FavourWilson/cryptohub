@@ -55,6 +55,19 @@ export const userApi = createApi({
       },
     }),
 
+    approveTransaction: builder.mutation({
+      query: (params) => {
+        return {
+          method: "PUT",
+          url: `admin/transaction/approve/${params.trans_id}`,
+          body: {
+            status: "funded"
+            
+          },
+        };
+      },
+    }),
+
     deleteUser: builder.mutation({
       query: (user_id) => {
         return {
@@ -75,5 +88,6 @@ export const {
   useEditUserBalanceMutation,
   useDeleteUserMutation,
   useDepositMutation,
-  useGetUserIdQuery
+  useGetUserIdQuery,
+  useApproveTransactionMutation,
 } = userApi;
