@@ -59,10 +59,9 @@ export const userApi = createApi({
       query: (params) => {
         return {
           method: "PUT",
-          url: `admin/transaction/approve/${params.trans_id}`,
+          url: `admin/transaction/approve/${params.trans_id}/`,
           body: {
-            status: "funded"
-            
+            status: params.status ? params.status : "",
           },
         };
       },
