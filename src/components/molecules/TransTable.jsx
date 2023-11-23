@@ -16,7 +16,7 @@ const TransTable = ({ userId }) => {
 
   const approveUser = async () => {
     const res = await approve({trans_id:data[0]?.id,status:"funded"});
-    location.reload();
+    window.location.replace("/admin");;
     // if (res) {
     //   res.data.status = "funded"
     // } else {
@@ -155,13 +155,13 @@ const TransTable = ({ userId }) => {
                   )}
                 </td>
                 <td className="px-2 text-center py-4 text-gray-700">
-                  {x?.investment_status === "start" ? (
+                  {x?.active === "start" ? (
                     <span className="bg-red-100 text-red-800 text-sm font-medium px-1 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
                       Not Started
                     </span>
                   ) : (
                     <span className="bg-green-100 text-green-800 text-sm font-medium px-1 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
-                      {x?.investment_status}
+                      {x?.active}
                     </span>
                   )}
                 </td>

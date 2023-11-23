@@ -3,7 +3,7 @@ import Widget from "./Widget"
 
 const AllWidgets = ({ user }) => {
   const total = user.balance.deposit + user.balance.earning + user.balance.bonus + user.balance.total;
-
+  console.log(user.balance.deposit );
 const Icon = ({ img, alt}) => (
     <img src={img} alt={alt} className="w-7 h-7"/>
   )

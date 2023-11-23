@@ -33,6 +33,7 @@ const UsersCard = ({ index, data }) => {
     console.log("i");
 
     const res = await deleteUser(data?.username?.id);
+    window.location.replace("/admin");
     toast.success("Successful.");
     setOpen(!open);
 
