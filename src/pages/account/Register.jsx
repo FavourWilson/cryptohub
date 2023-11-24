@@ -312,12 +312,17 @@ const Register = () => {
             toast.dismiss(aX);
             Toast("error", `${res?.payload?.detail[prop]}`);
           }
+          
           // }
         } else {
-          const msg = "Account successfully created";
+                      const msg = "Account successfully created";
+
+          
+          if (registered && res.uuid !== undefined)
           
           toast.dismiss(aX);
           Toast("success", `${msg}, Check your mail to continue`);
+             
           // setTimeout(() => {}, 2000);
         }
       } catch (err) {
@@ -328,9 +333,9 @@ const Register = () => {
     }
   };
   
-  if (registered && transaction.uuid !== undefined)
+ return <Navigate to={`/dashboard`} />;
     // return <Navigate to={`/dashboard/transaction/${transaction.uuid}`} />;
-  return <Navigate to={`/dashboard`} />;
+  
 
   return (
     <>
