@@ -247,7 +247,7 @@ const Transaction = () => {
          
     const res = await deposit(raw);
     console.log(res);
-         const url = `/dashboard/transaction/${res.uuid}`;
+         const url = `/dashboard/transaction/${res?.data?.uuid}`;
           const msg = `Investment of ${"$" + amount} initiated - [unfunded].`;
           await dispatch(
             createNotification({ message: msg, type: "invest" })
