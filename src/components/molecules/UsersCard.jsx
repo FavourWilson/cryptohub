@@ -33,7 +33,6 @@ const UsersCard = ({ index, data }) => {
     console.log("i");
 
     const res = await deleteUser(data?.username?.id);
-    window.location.replace("/admin");
     toast.success("Successful.");
     setOpen(!open);
 
@@ -98,10 +97,10 @@ const UsersCard = ({ index, data }) => {
 
         <div className="flex flex-col items-center pb-10">
           <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-            {data.username.first_name} {data.username.last_name}
+            {data.first_name} {data.last_name}
           </h5>
           <span className="text-sm text-gray-500 dark:text-gray-400">
-            {data.username.email}
+            {data.email}
           </span>
           <div className="flex mt-4 space-x-3 md:mt-6">
             <Link

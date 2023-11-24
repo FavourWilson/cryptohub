@@ -20,7 +20,6 @@ import Login from "./pages/account/Login";
 import Register from "./pages/account/Register";
 
 import Dashboard from "./pages/dashboard/Dashboard";
-import Deposit from "./pages/dashboard/Deposit";
 import Withdraw from "./pages/dashboard/Withdraw";
 import Transaction from "./pages/dashboard/Transactions";
 import Invest from "./pages/dashboard/Invest";
@@ -92,7 +91,6 @@ function App() {
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="invest" element={<Invest />} />
-          <Route path="deposit" element={<Invest />} />
           <Route path="withdraw" element={<Withdraw />} />
           <Route path="transaction" element={<Transaction />} />
           <Route path="transaction/:id" element={<InitDeposit />} />

@@ -117,7 +117,7 @@ const Drawer = ({ setOpen, open }) => {
 
       editUserBalance(raw);
       toast.success("Successful.");
-      window.location.replace("/admin");
+      window.location.replace("/dashboard/admin/all-users");
       // const res = await dispatch(SetBalance(raw));
       // if (res.meta.requestStatus.toLowerCase() === "rejected") {
       //   setErr(["Couldn't process."]);

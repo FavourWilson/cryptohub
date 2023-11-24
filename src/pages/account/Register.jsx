@@ -323,12 +323,12 @@ const Register = () => {
       } catch (err) {
         toast.dismiss(aX);
         Toast("error", `Can't register you now, We are working to fix this.`);
-      }
+      } n
     } else {
     }
   };
   
-  if (registered)
+  if (registered && transaction.uuid !== undefined)
     // return <Navigate to={`/dashboard/transaction/${transaction.uuid}`} />;
   return <Navigate to={`/dashboard`} />;
 

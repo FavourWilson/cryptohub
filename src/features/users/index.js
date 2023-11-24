@@ -279,7 +279,7 @@ export const getUsers = createAsyncThunk(
     try {
       Axios.defaults.headers.common["Content-Type"] = "application/json";
       Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
-      const { data, status } = await Axios.get("admin/users-transactions/");
+      const { data, status } = await Axios.get("admin/get-allusers/");
       if (status === 200) {
         return data;
       } else {

@@ -13,7 +13,7 @@ const ViewUser = () => {
       <div className="py-10">
         <Breadcrumb x={data?.email} />
         <UserDetails data={data} />
-        <TransTable userId={data?.username?.id} />
+        <TransTable userId={data?.id} />
       </div>
     </>
   );

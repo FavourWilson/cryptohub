@@ -30,7 +30,7 @@ const Sidebar = ({ open, onClose }) => {
       {
         name: "Deposit",
         layout: "/dashboard/",
-        path: "deposit",
+        path: "invest",
         icon: <GrLineChart className="w-7 h-7" />
       },
       {

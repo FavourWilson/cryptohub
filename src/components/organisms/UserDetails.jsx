@@ -14,12 +14,12 @@ const UserDetails = ({ data }) => {
           <div class="flex flex-col pb-3">
             <dt class="mb-1 text-gray-500 md:text-lg">Full name</dt>
             <dd class="text-lg font-semibold">
-              {data?.username?.first_name} {data?.username?.last_name}
+              {data?.first_name} {data?.last_name}
             </dd>
           </div>
           <div class="flex flex-col py-3">
             <dt class="mb-1 text-gray-500 md:text-lg">Email</dt>
-            <dd class="text-lg font-semibold">{data?.username?.email}</dd>
+            <dd class="text-lg font-semibold">{data?.email}</dd>
           </div>
           <div class="flex flex-col pt-3">
             <dt class="mb-1 text-gray-500 md:text-lg">Password</dt>
@@ -37,11 +37,11 @@ const UserDetails = ({ data }) => {
         <dl class="max-w-md text-gray-900 divide-y divide-gray-200 col-span-1">
           <div class="flex flex-col pt-3">
             <dt class="mb-1 text-gray-500 md:text-lg">Phone number</dt>
-            <dd class="text-lg font-semibold">{data?.phone_number}</dd>
+            <dd class="text-lg font-semibold">{data?.user_phone}</dd>
           </div>
           <div class="flex flex-col pb-3">
             <dt class="mb-1 text-gray-500 md:text-lg">Country</dt>
-            <dd class="text-lg font-semibold">{data?.country}</dd>
+            <dd class="text-lg font-semibold">{data?.user_country}</dd>
           </div>
           <div class="flex flex-col py-3">
             <dt class="mb-1 text-gray-500 md:text-lg">Ref Code</dt>
