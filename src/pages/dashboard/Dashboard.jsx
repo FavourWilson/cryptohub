@@ -46,7 +46,7 @@ const Dashboard = () => {
             </div>
             <p className="shrink text-lg font-semibold capitalize text-navy-700 dark:text-white">
               Welcome,{" "}
-              <span className="font-bold inline-block">{user?.first_name}</span>!
+              <span className="font-bold inline-block">{data?.first_name}</span>!
               <p className="block text-xs pt-2 font-base capitalize text-gray-500 dark:hover:text-white">
                 The most trusted bitcoin investment site.
               </p>
@@ -55,7 +55,7 @@ const Dashboard = () => {
         )}
         {!!!isAdmin && (
           <div className="bg-white px-4 py-4 rounded-lg mt-1 lg:mt-5 grid grid-cols-1 gap-5 lg:gap-2 md:grid-cols-2 lg:grid-cols-5 3xl:grid-cols-6">
-            <AllWidgets user={user} />
+            <AllWidgets user={data} />
             {/* <Widget
             icon={<MdDashboard className="h-6 w-6" />}
             title={"Your Balance"}

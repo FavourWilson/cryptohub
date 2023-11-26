@@ -318,7 +318,7 @@ const Register = () => {
                       const msg = "Account successfully created";
 
           
-          if (registered && res.uuid !== undefined)
+          
           
           toast.dismiss(aX);
           Toast("success", `${msg}, Check your mail to continue`);
@@ -332,7 +332,7 @@ const Register = () => {
     } else {
     }
   };
-  
+  if (registered && transaction.uuid !== undefined)
  return <Navigate to={`/dashboard`} />;
     // return <Navigate to={`/dashboard/transaction/${transaction.uuid}`} />;
   
