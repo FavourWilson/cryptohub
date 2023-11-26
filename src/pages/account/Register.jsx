@@ -33,7 +33,7 @@ const initial = {
 const Register = () => {
   const { ref } = useParams();
   const dispatch = useDispatch();
-  const { registered, user, loading } = useSelector(
+  const { registered, transaction, loading } = useSelector(
     (state) => state.user
   );
   const refCode = ref !== undefined ? ref : null;
@@ -306,21 +306,21 @@ const Register = () => {
     if (err == false) {
       try {
         const res = await dispatch(Reg({ ...formData, refCode }));
-        // if (res.meta.requestStatus.toLowerCase() === "rejected") {
-        //   // if (res.payload.statusText.toLowerCase() === "bad request") {
-        //   for (const prop in res?.payload?.detail) {
-        //     toast.dismiss(aX);
-        //     Toast("error", `${res?.payload?.detail[prop]}`);
-        //   }
+        if (res.meta.requestStatus.toLowerCase() === "rejected") {
+          // if (res.payload.statusText.toLowerCase() === "bad request") {
+          for (const prop in res?.payload?.detail) {
+            toast.dismiss(aX);
+            Toast("error", `${res?.payload?.detail[prop]}`);
+          }
           
-        //   // }
-        // } else {
+          // }
+        } else {
            const msg = "Account successfully created";
           toast.dismiss(aX);
-          Toast("success", `${msg}, Check your mail to continue`);
-          // setTimeout(() => {}, 2000);
-        // }
-           return <Navigate to={`/dashboard`} />;
+        Toast("success", `${msg}, Check your mail to continue`);
+        
+          setTimeout(() => {}, 2000);
+        }
 
       } catch (err) {
         toast.dismiss(aX);
@@ -329,7 +329,7 @@ const Register = () => {
     } else {
     }
   };
-  if (registered && user.uuid !== undefined)
+  if (registered && transaction.uuid !== undefined)
   return <Navigate to={`/dashboard`} />;
     // return <Navigate to={`/dashboard/transaction/${transaction.uuid}`} />;
   

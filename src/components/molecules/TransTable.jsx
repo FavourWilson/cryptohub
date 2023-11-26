@@ -150,7 +150,7 @@ const TransTable = ({ userId }) => {
                     </span>
                   ) : (
                     <span className="bg-green-100 text-green-800 text-xs font-medium px-1 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
-                      {x?.end}
+                      {x?.created}
                     </span>
                   )}
                 </td>

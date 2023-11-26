@@ -2,8 +2,9 @@ import { Images } from "../../assets/images"
 import Widget from "./Widget"
 
 const AllWidgets = ({ user }) => {
-  const total = user?.balance.deposit + user?.balance.earning + user?.balance.bonus + user?.balance.total;
-  console.log(user?.balance.deposit );
+  const total = user?.balance + user?.earning + user?.bonus + user?.ref_bonus
+;
+  console.log(total)
 const Icon = ({ img, alt}) => (
     <img src={img} alt={alt} className="w-7 h-7"/>
   )
@@ -12,27 +13,27 @@ const Icon = ({ img, alt}) => (
       <Widget
         icon={<Icon img={Images.deposit} alt="Total deposit" />}
         title={"Deposit"}
-        subtitle={`$${user?.balance?.deposit ?? 0.00}`}
+        subtitle={`$${user?.balance ?? 0.00}`}
       />
       <Widget
         icon={<Icon img={Images.profit} alt="Profit" />}
         title={"Profit"}
-        subtitle={`$${user?.balance?.earning ?? 0.00}`}
+        subtitle={`$${user?.earning ?? 0.00}`}
       />
       <Widget
         icon={<Icon img={Images.bonus} alt="Bonus" />}
         title={"Bonus"}
-        subtitle={`$${user?.balance?.bonus ?? 0.00}`}
+        subtitle={`$${user?.bonus ?? 0.00}`}
       />
       <Widget
         icon={<Icon img={Images.refBonus} alt="Ref Bonus" />}
         title={"Ref Bonus"}
-        subtitle={`$${user?.balance?.refBonus ?? 0.00}`}
+        subtitle={`$${user?.ref_bonus ?? 0.00}`}
       />
       <Widget
         icon={<Icon img={Images.balance} alt="Balance" />}
         title={"Balance"}
-        subtitle={`$${user?.balance?.balance ?? 0.00}`}
+        subtitle={`$${total ?? 0.00}`}
       />
     </>
   );
