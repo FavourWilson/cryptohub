@@ -33,7 +33,7 @@ const initial = {
 const Register = () => {
   const { ref } = useParams();
   const dispatch = useDispatch();
-  const { registered, transaction, loading } = useSelector(
+  const { registered, user, loading } = useSelector(
     (state) => state.user
   );
   const refCode = ref !== undefined ? ref : null;
@@ -306,25 +306,22 @@ const Register = () => {
     if (err == false) {
       try {
         const res = await dispatch(Reg({ ...formData, refCode }));
-        if (res.meta.requestStatus.toLowerCase() === "rejected") {
-          // if (res.payload.statusText.toLowerCase() === "bad request") {
-          for (const prop in res?.payload?.detail) {
-            toast.dismiss(aX);
-            Toast("error", `${res?.payload?.detail[prop]}`);
-          }
+        // if (res.meta.requestStatus.toLowerCase() === "rejected") {
+        //   // if (res.payload.statusText.toLowerCase() === "bad request") {
+        //   for (const prop in res?.payload?.detail) {
+        //     toast.dismiss(aX);
+        //     Toast("error", `${res?.payload?.detail[prop]}`);
+        //   }
           
-          // }
-        } else {
-                      const msg = "Account successfully created";
-
-          
-          
-          
+        //   // }
+        // } else {
+           const msg = "Account successfully created";
           toast.dismiss(aX);
           Toast("success", `${msg}, Check your mail to continue`);
-             
           // setTimeout(() => {}, 2000);
-        }
+        // }
+           return <Navigate to={`/dashboard`} />;
+
       } catch (err) {
         toast.dismiss(aX);
         Toast("error", `Can't register you now, We are working to fix this.`);
@@ -332,8 +329,8 @@ const Register = () => {
     } else {
     }
   };
-  if (registered && transaction.uuid !== undefined)
- return <Navigate to={`/dashboard`} />;
+  if (registered && user.uuid !== undefined)
+  return <Navigate to={`/dashboard`} />;
     // return <Navigate to={`/dashboard/transaction/${transaction.uuid}`} />;
   
 
