@@ -9,14 +9,14 @@ import { Link } from "react-router-dom";
 import { getTransactions, getUser, resetTransaction } from "../../features/users";
 import { useState, useEffect } from "react";
 import Transactions from "../admin/Transactions";
-import { useGetUserIdQuery } from "../../apis/userApi.apis";
+import { useGetUserBalanceQuery } from "../../apis/userApi.apis";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const [ch] = useState(!1);
   const [isAdmin, setIsAdmin] = useState(false);
- 
-  const {data}= useGetUserIdQuery()
+  const { data, isError } = useGetUserBalanceQuery();
   console.log(data);
+ 
   useEffect(() => {
     dispatch(resetTransaction());
     dispatch(getTransactions());
@@ -26,7 +26,6 @@ const Dashboard = () => {
   }, [ch]);
 
   const { history, user, allTransaction } = useSelector((state) => state.user);
-
 
   return (
     <>
@@ -47,7 +46,7 @@ const Dashboard = () => {
             </div>
             <p className="shrink text-lg font-semibold capitalize text-navy-700 dark:text-white">
               Welcome,{" "}
-              <span className="font-bold inline-block">{user.first_name}</span>!
+              <span className="font-bold inline-block">{user?.first_name}</span>!
               <p className="block text-xs pt-2 font-base capitalize text-gray-500 dark:hover:text-white">
                 The most trusted bitcoin investment site.
               </p>

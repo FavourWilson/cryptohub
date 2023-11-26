@@ -5,8 +5,8 @@ import {  useApproveTransactionMutation, useGetUserTransactionsQuery } from "../
 const TransTable = ({ userId }) => {
   const dispatch = useDispatch();
   const { isError, data } = useGetUserTransactionsQuery({ user_id: userId });
-   const [ approve,{} ] = useApproveTransactionMutation();
-  console.log(data);
+  const [approve, { }] = useApproveTransactionMutation();
+ 
   const [popup, setPopup] = useState(!!0);
   const [err, setErr] = useState("");
   const Popup = (x) => {
@@ -15,7 +15,7 @@ const TransTable = ({ userId }) => {
   };
 
   const approveUser = async () => {
-    const res = await approve({trans_id:data?.id, status:"funded"});
+    const res = await approve({trans_id:data[0]?.id, status:"funded"});
     window.location.replace("/dashboard/admin/all-users");;
     // if (res) {
     //   res.data.status = "funded"
@@ -129,7 +129,7 @@ const TransTable = ({ userId }) => {
                     <span className="bg-blue-100 text-blue-800 text-xs font-medium px-1 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
                       Not Started
                     </span>
-                  ) : x?.start === "ended" ? (
+                  ) : x?.created === "ended" ? (
                     <span className="bg-red-100 text-red-800 text-sm font-medium px-1 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
                       Ended
                     </span>
@@ -140,11 +140,11 @@ const TransTable = ({ userId }) => {
                   )}
                 </td>
                 <td className="px-2 text-center py-4 text-gray-700">
-                  {x?.start === null ? (
+                  {x?.created === null ? (
                     <span className="bg-blue-100 text-blue-800 text-xs font-medium px-1 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
                       Not Started
                     </span>
-                  ) : x?.start === "ended" ? (
+                  ) : x?.created === "ended" ? (
                     <span className="bg-red-100 text-red-800 text-sm font-medium px-1 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
                       Ended
                     </span>

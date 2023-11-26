@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { blockUser } from "../../features/users";
 import { useDeleteUserMutation } from "../../apis/userApi.apis";
-import { contains } from "jquery";
 import { ToastContainer, toast } from 'react-toastify';
 
 const UsersCard = ({ index, data }) => {
@@ -32,10 +30,10 @@ const UsersCard = ({ index, data }) => {
   const BlockUser = async (e) => {
     console.log("i");
 
-    const res = await deleteUser(data?.username?.id);
+    const res = await deleteUser(data?.id);
     toast.success("Successful.");
     setOpen(!open);
-
+    window.location.reload();
     console.log(res);
 
     // const res = await dispatch(blockUser({ uuid: data.username.id }));

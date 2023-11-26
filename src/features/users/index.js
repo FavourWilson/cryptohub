@@ -583,40 +583,6 @@ export const SetBalance = createAsyncThunk(
   }
 );
 
-export const blockUser = createAsyncThunk(
-  "admin/blockUser",
-  async ({ id}, thunkAPI) => {
-    const body = { id };
-    console.log("body", body);
-    try {
-      Axios.defaults.headers.common["Content-Type"] = "multipart/form-data";
-      Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
-      const { data, status } = await Axios.delete("admin/block-user", body);
-      console.log("data", data);
-      if (status === 200) {
-        return data;
-      } else {
-        return thunkAPI.rejectWithValue(data);
-      }
-    } catch (err) {
-      if (err?.response?.status === 400) {
-        const errors = {
-          status: err?.response?.status,
-          statusText: err?.response?.statusText.toUpperCase(),
-          detail: err?.response?.data,
-        };
-        return thunkAPI.rejectWithValue(errors);
-      } else {
-        const errors = {
-          status: 0,
-          statusText: null,
-          detail: err?.response?.data?.detail,
-        };
-        return thunkAPI.rejectWithValue(errors);
-      }
-    }
-  }
-);
 
 export const EditBlog = createAsyncThunk(
   "admin/EditBlog",
@@ -866,15 +832,7 @@ const userSlice = createSlice({
       .addCase(EditBlog.rejected, (state) => {
         state.loading = !1;
       })
-      .addCase(blockUser.pending, (state) => {
-        state.loading = !0;
-      })
-      .addCase(blockUser.fulfilled, (state) => {
-        state.loading = !1;
-      })
-      .addCase(blockUser.rejected, (state) => {
-        state.loading = !1;
-      })
+      
       .addCase(SetBalance.pending, (state) => {
         state.loading = !0;
       })
@@ -884,15 +842,7 @@ const userSlice = createSlice({
       .addCase(SetBalance.rejected, (state) => {
         state.loading = !1;
       })
-      // .addCase(Approve.pending, (state) => {
-      //   state.loading = !0;
-      // })
-      // .addCase(Approve.fulfilled, (state) => {
-      //   state.loading = !1;
-      // })
-      // .addCase(Approve.rejected, (state) => {
-      //   state.loading = !1;
-      // })
+    
       .addCase(sendToBal.pending, (state) => {
         state.loading = !0;
       })

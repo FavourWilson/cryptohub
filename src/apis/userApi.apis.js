@@ -54,6 +54,15 @@ export const userApi = createApi({
         };
       },
     }),
+    
+    getUserBalance: builder.query({
+      query: () => {
+        return {
+          method: "GET",
+          url: `/user-balance/`,
+        };
+      },
+    }),
 
     approveTransaction: builder.mutation({
       query: (params) => {
@@ -71,7 +80,7 @@ export const userApi = createApi({
       query: (user_id) => {
         return {
           method: "DELETE",
-          url: `admin/block-user`,
+          url: `admin/delete-user/`,
           body: {
             id: user_id,
           },
@@ -89,4 +98,5 @@ export const {
   useDepositMutation,
   useGetUserIdQuery,
   useApproveTransactionMutation,
+  useGetUserBalanceQuery,
 } = userApi;
