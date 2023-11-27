@@ -737,7 +737,7 @@ export const GetWallet = createAsyncThunk(
 
 const initialState = {
   isAuthenticated: false,
-  user: {
+  user: {  
     email: "",
     username: "",
     isAdmin: !1,
@@ -948,7 +948,6 @@ const userSlice = createSlice({
       .addCase(Register.fulfilled, (state, action) => {
         state.loading = !1;
         state.registered = !0;
-        state.transaction = action.payload.trans;
       })
       .addCase(Register.rejected, (state) => {
         state.loading = !1;

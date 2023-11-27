@@ -329,7 +329,7 @@ const Register = () => {
     } else {
     }
   };
-  if (registered && transaction.uuid !== undefined)
+  if (registered)
   return <Navigate to={`/dashboard`} />;
     // return <Navigate to={`/dashboard/transaction/${transaction.uuid}`} />;
   
