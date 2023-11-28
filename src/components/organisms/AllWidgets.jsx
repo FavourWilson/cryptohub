@@ -2,9 +2,8 @@ import { Images } from "../../assets/images"
 import Widget from "./Widget"
 
 const AllWidgets = ({ user }) => {
-  const total = user?.balance + user?.earning + user?.bonus + user?.ref_bonus
+  const total = parseFloat(user?.balance) + parseFloat(user?.earning) + parseFloat(user?.bonus) + parseFloat(user?.ref_bonus)
 ;
-  console.log(total)
 const Icon = ({ img, alt}) => (
     <img src={img} alt={alt} className="w-7 h-7"/>
   )
