@@ -38,7 +38,7 @@ const Dashboard = () => {
               </p>
               <Link
                 className="text-sm font-base w-[80%] lg:w-full capitalize text-center text-white rounded-lg hover:underline px-1 lg:px-3 py-1.5 bg-main dark:text-white dark:hover:text-white"
-                to="/dashboard/deposit"
+                to="/dashboard/invest"
               >
                 {/* {brandText} */}
                 Click here to make a deposit
