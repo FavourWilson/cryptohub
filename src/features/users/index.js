@@ -9,7 +9,7 @@ const token = () =>
 const headers = {
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token()}`,
+    Authorization: `Bearer cfb90493-c364-4ade-820d-b6848bc65f44`,
   },
 };
 

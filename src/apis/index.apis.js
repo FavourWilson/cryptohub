@@ -6,7 +6,7 @@ export const baseQuery = fetchBaseQuery({
   prepareHeaders: (headers) => {
     headers.set(
       `Authorization`,
-      `Bearer ${
+      `Bearer ${ 
         localStorage.getItem("cfb90493-c364-4ade-820d-b6848bc65f44") || ""
       }`
     );
