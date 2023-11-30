@@ -15,7 +15,7 @@ const TransTable = ({ userId }) => {
   };
 
   const approveUser = async () => {
-    const res = await approve({trans_id:data[0]?.id, status:"funded"});
+    const res = await approve({trans_id:data[0]?.id, status:"funded", active:"running"});
     window.location.replace("/dashboard/admin/all-users");;
     // if (res) {
     //   res.data.status = "funded"

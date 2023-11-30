@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import { toast, Toaster } from "react-hot-toast";
-  import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Link, Navigate, useParams } from "react-router-dom";
 import {
   AtSymbol,
@@ -22,7 +22,9 @@ const initial = {
   amount: "",
   payment: "btc",
   country: "AX",
-  fullName: "",
+  first_name: "",
+  last_name: "",
+  username:"",
   email: "",
   password: "",
   pwd: "",
@@ -49,7 +51,9 @@ const Register = () => {
     payment,
     country,
     phoneNumber,
-    fullName,
+    first_name,
+    last_name,
+    username,
     email,
     password,
     pwd,
@@ -197,7 +201,8 @@ const Register = () => {
       payment === "" ||
       country === "" ||
       phoneNumber === "" ||
-      fullName === "" ||
+      first_name === "" ||
+      last_name === "" ||
       email === "" ||
       password === "" ||
       pwd === ""
@@ -226,15 +231,15 @@ const Register = () => {
       return 0;
     }
 
-    const n = fullName.trim().split(" ");
+    // const n = fullName.trim().split(" ");
 
-    if (n.length < 2) {
-      toast.error("Please provide full name");
-      return 0;
-    } else if (n.length > 2) {
-      toast.error("Please provide just a first name and last name");
-      return 0;
-    }
+    // if (n.length < 2) {
+    //   toast.error("Please provide full name");
+    //   return 0;
+    // } else if (n.length > 2) {
+    //   toast.error("Please provide just a first name and last name");
+    //   return 0;
+    // }
 
     if (amount !== "") {
       const re = /^[0-9]+$/;
@@ -302,7 +307,7 @@ const Register = () => {
     }
 
     const aX = toast.loading("Creating your account...");
-    
+
     if (err == false) {
       try {
         const res = await dispatch(Reg({ ...formData, refCode }));
@@ -312,14 +317,14 @@ const Register = () => {
             toast.dismiss(aX);
             Toast("error", `${res?.payload?.detail[prop]}`);
           }
-          
+
           // }
         } else {
-           const msg = "Account successfully created";
+          const msg = "Account successfully created";
           toast.dismiss(aX);
-        Toast("success", `${msg}, Check your mail to continue`);
-        
-          setTimeout(() => {}, 2000);
+          Toast("success", `${msg}, Check your mail to continue`);
+
+          setTimeout(() => { }, 2000);
         }
 
       } catch (err) {
@@ -330,9 +335,9 @@ const Register = () => {
     }
   };
   if (registered)
-  return <Navigate to={`/dashboard`} />;
-    // return <Navigate to={`/dashboard/transaction/${transaction.uuid}`} />;
-  
+    return <Navigate to={`/dashboard`} />;
+  // return <Navigate to={`/dashboard/transaction/${transaction.uuid}`} />;
+
 
   return (
     <>
@@ -741,21 +746,70 @@ const Register = () => {
                         htmlFor=""
                         className="text-base font-medium text-gray-900"
                       >
-                        First & Last Name
+                        First Name
                       </label>
                       <div className="mt-2.5 relative text-gray-400 focus-within:text-gray-600">
-                        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                          <User />
-                        </div>
+                            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                              <User />
+                            </div>
+                            <input
+                              type="text"
+                              name="first_name"
+                              value={first_name}
+                              onChange={onChange}
+                              placeholder="Enter your first name"
+                              className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-minorDark caret-minorDark"
+                            />
 
-                        <input
-                          type="text"
-                          name="fullName"
-                          value={fullName}
-                          onChange={onChange}
-                          placeholder="Enter your full name"
-                          className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-minorDark caret-minorDark"
-                        />
+                          
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        htmlFor=""
+                        className="text-base font-medium text-gray-900"
+                      >
+                        Last Name
+                      </label>
+                      <div className="mt-2.5 relative text-gray-400 focus-within:text-gray-600">
+                        
+                            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                              <User />
+                            </div>
+                            
+
+                          <input
+                            type="text"
+                            name="last_name"
+                            value={last_name}
+                            onChange={onChange}
+                            placeholder="Enter your Last name"
+                            className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-minorDark caret-minorDark"
+                          />
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        htmlFor=""
+                        className="text-base font-medium text-gray-900"
+                      >
+                        Username
+                      </label>
+                      <div className="mt-2.5 relative text-gray-400 focus-within:text-gray-600">
+                        
+                            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                              <User />
+                            </div>
+                            
+
+                          <input
+                            type="text"
+                            name="username"
+                            value={username}
+                            onChange={onChange}
+                            placeholder="Enter your Username"
+                            className="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-minorDark caret-minorDark"
+                          />
                       </div>
                     </div>
 

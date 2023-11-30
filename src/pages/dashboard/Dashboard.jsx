@@ -46,7 +46,7 @@ const Dashboard = () => {
             </div>
             <p className="shrink text-lg font-semibold capitalize text-navy-700 dark:text-white">
               Welcome,{" "}
-              <span className="font-bold inline-block">{data?.first_name}</span>!
+              <span className="font-bold inline-block">{data?.username?.username}</span>!
               <p className="block text-xs pt-2 font-base capitalize text-gray-500 dark:hover:text-white">
                 The most trusted bitcoin investment site.
               </p>

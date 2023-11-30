@@ -71,6 +71,7 @@ export const userApi = createApi({
           url: `admin/transaction/approve/${params.trans_id}/`,
           body: {
             status: params.status ? params.status : "",
+            active: params.active ? params.active : ""
           },
         };
       },
