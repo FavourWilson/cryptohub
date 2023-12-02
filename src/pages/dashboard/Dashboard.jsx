@@ -15,8 +15,7 @@ const Dashboard = () => {
   const [ch] = useState(!1);
   const [isAdmin, setIsAdmin] = useState(false);
   const { data, isError } = useGetUserBalanceQuery();
-  console.log(data);
- 
+  console.log(data)
   useEffect(() => {
     dispatch(resetTransaction());
     dispatch(getTransactions());
@@ -26,7 +25,6 @@ const Dashboard = () => {
   }, [ch]);
 
   const { history, user, allTransaction } = useSelector((state) => state.user);
-
   return (
     <>
       <div className="max-w-full mx-auto py-3 lg:py-10 lg:pl-14">

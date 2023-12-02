@@ -16,6 +16,7 @@ const InitDeposit = () => {
   const navigate = useNavigate();
   const { transaction, loading, admin } = useSelector((state) => state.user);
   const wallet = admin.wallet;
+  console.log(wallet);
   const { id } = useParams();
   const [ch, setCh] = useState("one");
   const [data, setData] = useState(init);
