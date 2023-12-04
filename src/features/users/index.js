@@ -359,6 +359,37 @@ export const getTransactions = createAsyncThunk(
     }
   }
 );
+export const getuserTrans = createAsyncThunk(
+  "user/getTransactions",
+  async ({id}, thunkAPI) => {
+    try {
+      Axios.defaults.headers.common["Content-Type"] = "application/json";
+      Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
+      const { data, status } = await Axios.get(`/transactions/`);
+      if (status === 200) {
+        return data;
+      } else {
+        return thunkAPI.rejectWithValue(data);
+      }
+    } catch (err) {
+      if (err?.response?.status === 400) {
+        const errors = {
+          status: err?.response?.status,
+          statusText: err?.response?.statusText.toUpperCase(),
+          detail: err?.response?.data,
+        };
+        return thunkAPI.rejectWithValue(errors);
+      } else {
+        const errors = {
+          status: 0,
+          statusText: null,
+          detail: err?.response?.data?.detail,
+        };
+        return thunkAPI.rejectWithValue(errors);
+      }
+    }
+  }
+);
 
 export const getTransaction = createAsyncThunk(
   "admin/getTransaction",
@@ -368,9 +399,10 @@ export const getTransaction = createAsyncThunk(
     try {
       Axios.defaults.headers.common["Content-Type"] = "application/json";
       Axios.defaults.headers.common["Authorization"] = `Bearer ${token()}`;
-      const { data, status } = await Axios.get(`transaction?id=${id}`);
+      const { data, status } = await Axios.get(`/user-transaction/${id}`);
       if (status === 200) {
         return data;
+        console.log(data)
       } else {
         return thunkAPI.rejectWithValue(data);
       }
@@ -762,6 +794,7 @@ const initialState = {
   allTransaction: [],
   history: [],
   refHistory: [],
+  userTrans:{},
   // status: [
   //   {
   //     invested: [0, 0, 0, 0, 0, 0],
@@ -846,7 +879,16 @@ const userSlice = createSlice({
       .addCase(SetBalance.rejected, (state) => {
         state.loading = !1;
       })
-    
+      .addCase(getuserTrans.pending, (state) => {
+        state.loading = !0;
+      })
+      .addCase(getuserTrans.fulfilled, (state) => {
+        state.loading = !1;
+        state.userTrans = action.payload;
+      })
+       .addCase(getuserTrans.rejected, (state) => {
+        state.loading = !1;
+      })
       .addCase(sendToBal.pending, (state) => {
         state.loading = !0;
       })

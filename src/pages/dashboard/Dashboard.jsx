@@ -6,25 +6,35 @@ import Activities from "../../components/organisms/Activities";
 import { useDispatch, useSelector } from "react-redux";
 import AllWidgets from "../../components/organisms/AllWidgets";
 import { Link } from "react-router-dom";
-import { getTransactions, getUser, resetTransaction } from "../../features/users";
+import users, { getTransactions, getUser, resetTransaction } from "../../features/users";
 import { useState, useEffect } from "react";
 import Transactions from "../admin/Transactions";
 import { useGetUserBalanceQuery } from "../../apis/userApi.apis";
+
 const Dashboard = () => {
+
   const dispatch = useDispatch();
   const [ch] = useState(!1);
+
+  const { history, user, allTransaction, userTrans } = useSelector((state) => state.user);
+  
   const [isAdmin, setIsAdmin] = useState(false);
   const { data, isError } = useGetUserBalanceQuery();
   console.log(data)
-  useEffect(() => {
-    dispatch(resetTransaction());
-    dispatch(getTransactions());
-    if (localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")) {
+  const initalData = async() => {
+    await dispatch(resetTransaction());
+   await dispatch(getTransactions());
+     if (localStorage.getItem("e70913ab-4047-48bc-8c33-aa2e7b3aeb2a")) {
       setIsAdmin(true);
     }
+  }
+  useEffect(() => {
+      initalData()
+   
   }, [ch]);
 
-  const { history, user, allTransaction } = useSelector((state) => state.user);
+  
+  console.log(allTransaction);
   return (
     <>
       <div className="max-w-full mx-auto py-3 lg:py-10 lg:pl-14">
@@ -84,6 +94,16 @@ const Dashboard = () => {
               <TradeChart id="df5d3f" coin="ETH" />
             </div>
           )}
+          {/* <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+            {!!!isAdmin && (
+              <Tables
+                show={!1}
+                title="Transaction"
+                columnsData={userTransaction}
+                tableData={userTrans}
+              />
+            )}
+          </div> */}
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
             {!!!isAdmin && (
               <Tables

@@ -1,11 +1,12 @@
 import Card from "../../components/atom/Card";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { GetWallet, getTransaction, uploadImage } from "../../features/users";
 import Clipboard from "react-clipboard.js";
 import Converter from "../../components/atom/Converter";
 import { toast, Toaster } from "react-hot-toast";
+import { useGetUserTransactionQuery } from "../../apis/userApi.apis";
 
 const init = {
   image: null,
@@ -16,17 +17,16 @@ const InitDeposit = () => {
   const navigate = useNavigate();
   const { transaction, loading, admin } = useSelector((state) => state.user);
   const wallet = admin.wallet;
-  console.log(wallet);
   const { id } = useParams();
   const [ch, setCh] = useState("one");
-  const [data, setData] = useState(init);
-
+  const [trans, setTrans] = useState(init);
+  console.log(transaction)
   const initX = async () => {
     await dispatch(getTransaction({ id }));
   };
 
   const handleImageChange = (e) => {
-    setData({
+    setTrans({
       image: e.target.files[0],
     });
   };
@@ -49,7 +49,7 @@ const InitDeposit = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (data.image === null) {
+    if (trans.image === null) {
       Toast("error", "Please provide your proof of payment");
       return 0;
     }
@@ -58,7 +58,7 @@ const InitDeposit = () => {
 
     try {
       const res = await dispatch(
-        uploadImage({ ...data, path: "proof", uuid: id })
+        uploadImage({ ...trans, path: "proof", uuid: id })
       );
       if (res.meta.requestStatus.toLowerCase() === "rejected") {
         // if (res.payload.statusText.toLowerCase() === "bad request") {
@@ -112,7 +112,7 @@ const InitDeposit = () => {
             >
               <header className="relative flex flex-col lg:flex-row items-center justify-between">
                 <div className="text-xl font-bold text-white dark:text-white w-full px-2.5 py-4 bg-main">
-                  How to Fund your {transaction.type}
+                  How to Fund your Investment
                 </div>
 
                 {/* <CardMenu /> */}
@@ -121,9 +121,9 @@ const InitDeposit = () => {
               <div className="mt-8 overflow-x-scroll xl:overflow-x-hidden">
                 <div className="space-y-5 text-left">
                   <p className="mt-2 text-base text-gray-800 font-bold">
-                    Make the deposit of your {transaction.type} amount valued ($
-                    {transaction.amount}) to (
-                    {transaction.payment}) Wallet / Account
+                    Make the deposit of your {transaction?._type} amount valued ($
+                    {transaction?.amount}) to (
+                    {transaction?.payment}) Wallet / Account
                     generate and assigned to you for this transaction.
                   </p>
                   <p className="font-black">IMPORTANT!</p>
@@ -220,7 +220,7 @@ const InitDeposit = () => {
               </div>
             </Card>
           )}
-          {transaction.type === "investment" && (
+          {transaction._type === "deposit" && (
             <Card extra={"w-full h-auto p-3"}>
               <div className="relative mb-3 flex items-center justify-between pt-1">
                 <h4 className="text-xl font-bold text-navy-700 dark:text-white">

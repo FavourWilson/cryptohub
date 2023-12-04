@@ -63,6 +63,15 @@ export const userApi = createApi({
         };
       },
     }),
+    
+    getUserTransaction: builder.query({
+      query: () => {
+        return {
+          method: "GET",
+          url: `/transactions/`,
+        };
+      },
+    }),
 
     approveTransaction: builder.mutation({
       query: (params) => {
@@ -100,4 +109,5 @@ export const {
   useGetUserIdQuery,
   useApproveTransactionMutation,
   useGetUserBalanceQuery,
+  useGetUserTransactionQuery
 } = userApi;
