@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { SetBalance, getUsers } from "../../features/users";
-import { useEditUserBalanceMutation } from "../../apis/userApi.apis";
+import { useAddBonusMutation, useAddRefBonusMutation, useEditUserBalanceMutation } from "../../apis/userApi.apis";
 import { ToastContainer, toast } from 'react-toastify';
 
 const Drawer = ({ setOpen, open }) => {
@@ -13,16 +13,27 @@ const Drawer = ({ setOpen, open }) => {
   const [bal] = useState(data?.balance);
   const [pass, setPass] = useState("");
  
+  const [ AddBonus,{} ] = useAddBonusMutation();
+  const [ AddRefBonus, {}  ]= useAddRefBonusMutation();
   const navigate = useNavigate();
-  const init = {
-    user_id: data?.username?.id,
-    balance: bal?.balance,
-    ref_bonus: bal?.ref_bonus,
-    bonus: bal?.bonus,
-    profit: bal?.profit,
-    cw: bal?.cw,
-  };
+  // const init = {
+  //   user_id: data?.username?.id,
+  //   balance: bal?.balance,
+  //   ref_bonus: bal?.ref_bonus,
+  //   bonus: bal?.bonus,
+  //   profit: bal?.profit,
+  //   cw: bal?.cw,
+  // };
 
+  console.log(data?.id)
+  const initialBonus = {
+    username_id: data?.id,
+    bonus: ""
+  }
+  const initialRefBonus = {
+    username_id: data?.id,
+    ref_bonus: ""
+  }
 
     const Toast = (t, m) => {
     toast.remove();
@@ -38,15 +49,38 @@ const Drawer = ({ setOpen, open }) => {
   };  
 
 
-  const [formData, setFormData] = useState(init);
-  const { balance, ref_bonus, bonus, profit, cw } = formData;
+  // const [formData, setFormData] = useState(init);
+  // const { balance, ref_bonus, bonus, profit, cw } = formData;
 
+  const [ formBonus, setFormBonus ] = useState(initialBonus)
+  const { bonus } = formBonus;
+  
+
+  const [ formRefBonus, setRefFormBonus ] = useState(initialRefBonus)
+   const { ref_bonus } = formRefBonus;
+
+
+
+
+
+
+
+
+  
+
+
+ 
+
+
+ 
   const [err, setErr] = useState([]);
 
   const [eBal, setEBal] = useState(!!1);
   const [ePro, setEPro] = useState(!!1);
   const [eBon, setEBon] = useState(!!1);
   const [eRbon, setERbon] = useState(!!1);
+
+
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -55,6 +89,24 @@ const Drawer = ({ setOpen, open }) => {
   const onChangeT = (e) => {
     setFormData({ ...formData, [e.target.name]: !cw });
   };
+
+
+   const handleBonus = (e) => {
+    setFormBonus({...formBonus, [e.target.name]: e.target.value});
+  }
+
+  const handleRefBonus = (e) => {
+    setRefFormBonus({...formRefBonus, [e.target.name]: e.target.value})
+  }
+
+  const rawbonus = {
+    username_id: data?.id,
+    bonus: bonus
+  }
+  const rawRefBonus = {
+    username_id: data?.id,
+    ref_bonus: ref_bonus
+  }
 
   useEffect(() => {
     Reset();
@@ -82,7 +134,23 @@ const Drawer = ({ setOpen, open }) => {
       });
   };
 
-  const [editUserBalance, {}] = useEditUserBalanceMutation();
+  const [editUserBalance, { }] = useEditUserBalanceMutation();
+  
+ const onRefBonus = async(e) => {
+   e.preventDefault()
+   await AddRefBonus(rawRefBonus);
+   toast.success("Successful.");
+   window.location.replace("/dashboard/admin/all-users");
+  }
+
+
+  const onBonus = async (e) => {
+    e.preventDefault()
+    await AddBonus(rawbonus);
+    toast.success("Successful.");
+    window.location.replace("/dashboard/admin/all-users");
+
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -106,16 +174,16 @@ const Drawer = ({ setOpen, open }) => {
     if (hasErr.length === 0) {
       setErr([]);
 
-      const raw = {
-        user_id: data?.username.id,
-        balance: balance,
-        profit: profit,
-        bonus: bonus,
-        ref_bonus: ref_bonus,
-        // cw,
-      };
+      // const raw = {
+      //   user_id: data?.username.id,
+      //   balance: balance,
+      //   profit: profit,
+      //   bonus: bonus,
+      //   ref_bonus: ref_bonus,
+      //   // cw,
+      // };
 
-      editUserBalance(raw);
+      // editUserBalance(raw);
       toast.success("Successful.");
       window.location.replace("/dashboard/admin/all-users");
       // const res = await dispatch(SetBalance(raw));
@@ -197,7 +265,7 @@ const Drawer = ({ setOpen, open }) => {
               {x}
             </p>
           ))}
-          <form className="space-y-3" onSubmit={onSubmit}>
+          {/* <form className="space-y-3 mb-5" onSubmit={onSubmit}>
             <div>
               <label
                 htmlFor="totalBalance"
@@ -406,6 +474,73 @@ const Drawer = ({ setOpen, open }) => {
                 </button>
               </div>
             )}
+          </form> */}
+
+          <p>Add User Bonus and Referral Bonus</p>
+
+          <form className="space-y-3 mb-5">
+               <div>
+              <label
+                htmlFor="bonus"
+                className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Bonus
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
+                
+                  <>
+                    <input
+                      type="text"
+                    id="bonus"
+                    name="bonus"
+                      className="block w-full p-2.5 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      value={bonus}
+                      onChange={handleBonus}
+                    />
+                    <button
+                      type="button"
+                      onClick={onBonus}
+                      className="text-white absolute right-2.5 bottom-1.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      Save
+                    </button>
+                  </>
+                
+              </div>
+            </div>
+          </form>
+          <form className="space-y-3">
+               <div>
+              <label
+                htmlFor="bonus"
+                className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Referral Bonus
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
+                
+                  <>
+                    <input
+                      type="text"
+                    id="Referralbonus"
+                      name="ref_bonus"
+                      className="block w-full p-2.5 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      value={ref_bonus}
+                      onChange={handleRefBonus}
+                    />
+                    <button
+                      type="button"
+                      onClick={onRefBonus}
+                      className="text-white absolute right-2.5 bottom-1.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      Save
+                    </button>
+                  </>
+                
+              </div>
+            </div>
           </form>
         </div>
         <div className="mb-6 flex flex-col gap-1">

@@ -27,6 +27,8 @@ export const userApi = createApi({
         };
       },
     }),
+
+
     deposit: builder.mutation({
       query: (params) => {
         console.log(params);
@@ -35,12 +37,36 @@ export const userApi = createApi({
           url: `transactions/`,
           body: { 
             status: params.status ? params.status : "",
-            plan: params.plan ? params.plan : "",
-            roi: params.roi ? params.roi : "",
-            payment: params.payment ? params.payment : "",
-            active: params.active ? params.active : "",
-            isNew: params.isNew ? params.isNew : "",
-            amount: params.amount ? params.amount : "",
+          
+          },
+        };
+      },
+    }),
+    
+    addRefBonus: builder.mutation({
+      query: (params) => {
+        console.log(params);
+        return {
+          method: "POST",
+          url: `/admin-add-ref-bonus-to-user-ref-bonus/`,
+          body: { 
+            username_id: params.username_id ? params.username_id : "",
+           ref_bonus: params.ref_bonus ? params.ref_bonus : "",
+            
+          },
+        };
+      },
+    }),
+    addBonus: builder.mutation({
+      query: (params) => {
+        console.log(params);
+        return {
+          method: "POST",
+          url: `/admin-add-bonus-to-user-bonus/`,
+          body: { 
+            username_id: params.username_id ? params.username_id : "",
+            bonus: params.bonus ? params.bonus: "",
+            
           },
         };
       },
@@ -109,5 +135,8 @@ export const {
   useGetUserIdQuery,
   useApproveTransactionMutation,
   useGetUserBalanceQuery,
-  useGetUserTransactionQuery
+  useGetUserTransactionQuery,
+  useAddBonusMutation,
+  useAddRefBonusMutation
+  
 } = userApi;

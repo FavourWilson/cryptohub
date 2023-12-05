@@ -6,7 +6,7 @@ const TransTable = ({ userId }) => {
   const dispatch = useDispatch();
   const { isError, data } = useGetUserTransactionsQuery({ user_id: userId });
   const [approve, { }] = useApproveTransactionMutation();
- 
+  console.log(data)
   const [popup, setPopup] = useState(!!0);
   const [err, setErr] = useState("");
   const Popup = (x) => {
