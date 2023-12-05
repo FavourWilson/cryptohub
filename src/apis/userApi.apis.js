@@ -37,6 +37,12 @@ export const userApi = createApi({
           url: `transactions/`,
           body: { 
             status: params.status ? params.status : "",
+            plan: params.plan ? params.plan : "",
+            roi: params.roi ? params.roi : "",
+            payment: params.payment ? params.payment : "",
+            active: params.active ? params.active : "",
+            isNew: params.isNew ? params.isNew : "",
+            amount: params.amount ? params.amount : "",
           
           },
         };
