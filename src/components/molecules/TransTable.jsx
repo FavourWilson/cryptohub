@@ -144,13 +144,13 @@ const TransTable = ({ userId }) => {
                     <span className="bg-blue-100 text-blue-800 text-xs font-medium px-1 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
                       Not Started
                     </span>
-                  ) : x?.created === "ended" ? (
+                  ) : x?.to_end === "ended" ? (
                     <span className="bg-red-100 text-red-800 text-sm font-medium px-1 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
                       Ended
                     </span>
                   ) : (
                     <span className="bg-green-100 text-green-800 text-xs font-medium px-1 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
-                      {x?.created}
+                      {x?.to_end}
                     </span>
                   )}
                 </td>
