@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { SetBalance, getUsers } from "../../features/users";
-import { useAddBonusMutation, useAddRefBonusMutation, useEditUserBalanceMutation } from "../../apis/userApi.apis";
+import { useAddBonusMutation, useAddProfitMutation, useAddRefBonusMutation, useEditUserBalanceMutation } from "../../apis/userApi.apis";
 import { ToastContainer, toast } from 'react-toastify';
 
 const Drawer = ({ setOpen, open }) => {
@@ -15,6 +15,7 @@ const Drawer = ({ setOpen, open }) => {
  
   const [ AddBonus,{} ] = useAddBonusMutation();
   const [ AddRefBonus, {}  ]= useAddRefBonusMutation();
+  const [ AddProfit, {}  ]= useAddProfitMutation();
   const navigate = useNavigate();
   // const init = {
   //   user_id: data?.username?.id,
@@ -33,6 +34,11 @@ const Drawer = ({ setOpen, open }) => {
   const initialRefBonus = {
     username_id: data?.id,
     ref_bonus: ""
+  }
+
+  const initalAddProfit = {
+    username_id: data?.id,
+    fund: ""
   }
 
     const Toast = (t, m) => {
@@ -57,7 +63,10 @@ const Drawer = ({ setOpen, open }) => {
   
 
   const [ formRefBonus, setRefFormBonus ] = useState(initialRefBonus)
-   const { ref_bonus } = formRefBonus;
+  const { ref_bonus } = formRefBonus;
+  
+  const [ formAddProfit, setAddProfit ] = useState(initalAddProfit)
+   const { fund } = formAddProfit;
 
 
 
@@ -99,6 +108,10 @@ const Drawer = ({ setOpen, open }) => {
     setRefFormBonus({...formRefBonus, [e.target.name]: e.target.value})
   }
 
+  const handleProfit = (e) => {
+    setAddProfit({...formAddProfit, [e.target.name]: e.target.value})
+  }
+
   const rawbonus = {
     username_id: data?.id,
     bonus: bonus
@@ -106,6 +119,10 @@ const Drawer = ({ setOpen, open }) => {
   const rawRefBonus = {
     username_id: data?.id,
     ref_bonus: ref_bonus
+  }
+  const rawProfit = {
+    username_id: data?.id,
+    fund: fund
   }
 
   useEffect(() => {
@@ -147,6 +164,14 @@ const Drawer = ({ setOpen, open }) => {
   const onBonus = async (e) => {
     e.preventDefault()
     await AddBonus(rawbonus);
+    toast.success("Successful.");
+    window.location.replace("/dashboard/admin/all-users");
+
+  }
+
+  const onProfit = async (e) => {
+    e.preventDefault()
+    await AddProfit(rawProfit);
     toast.success("Successful.");
     window.location.replace("/dashboard/admin/all-users");
 
@@ -484,6 +509,38 @@ const Drawer = ({ setOpen, open }) => {
                 htmlFor="bonus"
                 className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
+                Add Profit
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
+                
+                  <>
+                    <input
+                      type="text"
+                    id="fund"
+                    name="fund"
+                      className="block w-full p-2.5 pl-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      value={fund}
+                      onChange={handleProfit}
+                    />
+                    <button
+                      type="button"
+                      onClick={onProfit}
+                      className="text-white absolute right-2.5 bottom-1.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      Save
+                    </button>
+                  </>
+                
+              </div>
+            </div>
+          </form>
+          <form className="space-y-3 mb-5">
+               <div>
+              <label
+                htmlFor="bonus"
+                className="mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
                 Bonus
               </label>
               <div className="relative">
@@ -510,6 +567,7 @@ const Drawer = ({ setOpen, open }) => {
               </div>
             </div>
           </form>
+
           <form className="space-y-3">
                <div>
               <label

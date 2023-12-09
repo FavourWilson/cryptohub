@@ -49,7 +49,7 @@ const UserDetails = ({ d }) => {
           <div class="flex flex-col py-3">
             <dt class="mb-1 text-gray-500 md:text-lg">Account Balance</dt>
             <dd class="text-lg font-semibold">
-              { data?.balance}
+              { data?.sum_of_user_funds}
             </dd>
           </div>
         </dl>

@@ -63,6 +63,7 @@ export const userApi = createApi({
         };
       },
     }),
+
     addBonus: builder.mutation({
       query: (params) => {
         console.log(params);
@@ -72,6 +73,21 @@ export const userApi = createApi({
           body: { 
             username_id: params.username_id ? params.username_id : "",
             bonus: params.bonus ? params.bonus: "",
+            
+          },
+        };
+      },
+    }),
+
+    addProfit: builder.mutation({
+      query: (params) => {
+        console.log(params);
+        return {
+          method: "POST",
+          url: `/admin/add-fund-to-user-balance/`,
+          body: { 
+            username_id: params.username_id ? params.username_id : "",
+            fund: params.fund ? params.fund : "",
             
           },
         };
@@ -100,7 +116,7 @@ export const userApi = createApi({
       query: ({user_id}) => {
         return {
           method: "GET",
-          url: `/admin/get-user-balance/${user_id}/`,
+          url: `/admin/get-user-total-funds/${user_id}/`,
         };
       },
     }),
@@ -153,5 +169,6 @@ export const {
   useGetUserTransactionQuery,
   useAddBonusMutation,
   useAddRefBonusMutation,
-useGetUserTotalBalanceQuery  
+  useGetUserTotalBalanceQuery,
+useAddProfitMutation
 } = userApi;
