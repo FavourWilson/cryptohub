@@ -96,6 +96,15 @@ export const userApi = createApi({
       },
     }),
     
+    getUserTotalBalance: builder.query({
+      query: ({user_id}) => {
+        return {
+          method: "GET",
+          url: `/admin/get-user-balance/${user_id}/`,
+        };
+      },
+    }),
+    
     getUserTransaction: builder.query({
       query: () => {
         return {
@@ -143,6 +152,6 @@ export const {
   useGetUserBalanceQuery,
   useGetUserTransactionQuery,
   useAddBonusMutation,
-  useAddRefBonusMutation
-  
+  useAddRefBonusMutation,
+useGetUserTotalBalanceQuery  
 } = userApi;
