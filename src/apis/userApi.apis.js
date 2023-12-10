@@ -84,7 +84,7 @@ export const userApi = createApi({
         console.log(params);
         return {
           method: "POST",
-          url: `/admin/add-fund-to-user-balance/`,
+          url: `/admin/add-fund-to-user-earning/`,
           body: { 
             username_id: params.username_id ? params.username_id : "",
             fund: params.fund ? params.fund : "",

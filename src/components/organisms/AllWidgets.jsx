@@ -12,22 +12,22 @@ const Icon = ({ img, alt}) => (
       <Widget
         icon={<Icon img={Images.deposit} alt="Total deposit" />}
         title={"Deposit"}
-        subtitle={`$${user?.balance ?? 0.00}`}
+        subtitle={`$${parseFloat(user?.balance) ?? 0.00}`}
       />
       <Widget
         icon={<Icon img={Images.profit} alt="Profit" />}
         title={"Profit"}
-        subtitle={`$${user?.earning ?? 0.00}`}
+        subtitle={`$${parseFloat(user?.earning) ?? 0.00}`}
       />
       <Widget
         icon={<Icon img={Images.bonus} alt="Bonus" />}
         title={"Bonus"}
-        subtitle={`$${user?.bonus ?? 0.00}`}
+        subtitle={`$${parseFloat(user?.bonus) ?? 0.00}`}
       />
       <Widget
         icon={<Icon img={Images.refBonus} alt="Ref Bonus" />}
         title={"Ref Bonus"}
-        subtitle={`$${user?.ref_bonus ?? 0.00}`}
+        subtitle={`$${parseFloat(user?.ref_bonus) ?? 0.00}`}
       />
       <Widget
         icon={<Icon img={Images.balance} alt="Balance" />}

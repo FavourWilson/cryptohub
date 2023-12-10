@@ -156,24 +156,24 @@ const Drawer = ({ setOpen, open }) => {
  const onRefBonus = async(e) => {
    e.preventDefault()
    await AddRefBonus(rawRefBonus);
-   toast.success("Successful.");
-   window.location.replace("/dashboard/admin/all-users");
+  // toast.success("Successful.");
+  // window.location.replace("/dashboard/admin/all-users");
   }
 
 
   const onBonus = async (e) => {
     e.preventDefault()
     await AddBonus(rawbonus);
-    toast.success("Successful.");
-    window.location.replace("/dashboard/admin/all-users");
+  //  toast.success("Successful.");
+   // window.location.replace("/dashboard/admin/all-users");
 
   }
 
   const onProfit = async (e) => {
     e.preventDefault()
     await AddProfit(rawProfit);
-    toast.success("Successful.");
-    window.location.replace("/dashboard/admin/all-users");
+   // toast.success("Successful.");
+   // window.location.replace("/dashboard/admin/all-users");
 
   }
 

@@ -38,7 +38,7 @@ const Widget = ({ icon, title, subtitle }) => {
           <p className="text-sm font-medium text-gray-700">{title}</p>
           <h4 className="text-xl font-black tracking-wider text-navy-700 dark:text-white">
             {subtitle}
-            {subtitle !== "$0.0" && (
+            {/* {subtitle !== "$0.0" && (
               <>
                 <br />
                 <span
@@ -52,7 +52,7 @@ const Widget = ({ icon, title, subtitle }) => {
                   withdraw to balance
                 </span>
               </>
-            )}
+            )} */}
           </h4>
         </div>
       </Card>
